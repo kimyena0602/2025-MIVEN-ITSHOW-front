@@ -8,7 +8,7 @@
   padding: 0;
 }
 
-.body {
+.Body {
   position: fixed;
 }
 
@@ -30,6 +30,7 @@
 .Logo {
   color: #15719e;
   font-family: Pretendard;
+  cursor: pointer;
   font-size: 40px;
   font-weight: 700;
 }
