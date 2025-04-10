@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("../assets/fonts/Pretendard.ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  position: fixed;
+}
+
+.Allnavcontainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  row-gap: 10px;
+  margin-left: 50px;
+  margin-top: -370px;
+}
+
+.Gradation {
+  width: 100vw;
+  height: 416px;
+  background: linear-gradient(180deg, #15719e 0%, #fff 100%);
+}
+
+.Logo {
+  color: #15719e;
+  font-family: Pretendard;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.Navdetail {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.Clicknav {
+  color: #f5f5f5;
+  font-family: Pretendard;
+  font-size: 23px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.Navfirstline,
+.Navsecondline {
+  display: flex;
+  column-gap: 15px;
+}
