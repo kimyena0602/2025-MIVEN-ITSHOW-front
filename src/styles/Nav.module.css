@@ -8,10 +8,6 @@
   padding: 0;
 }
 
-.Body {
-  position: fixed;
-}
-
 .Allnavcontainer {
   display: flex;
   flex-direction: column;
@@ -31,8 +27,8 @@
   color: #15719e;
   font-family: Pretendard;
   cursor: pointer;
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 29px;
+  font-weight: 800;
 }
 
 .Navdetail {
@@ -44,8 +40,8 @@
 .Clicknav {
   color: #f5f5f5;
   font-family: Pretendard;
-  font-size: 23px;
-  font-weight: 500;
+  font-size: 21px;
+  font-weight: 200;
   cursor: pointer;
 }
 

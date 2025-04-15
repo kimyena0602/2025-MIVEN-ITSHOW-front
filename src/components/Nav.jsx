@@ -3,7 +3,7 @@ import styles from "../styles/Nav.module.css";
 
 export default function Nav() {
   return (
-    <div className={styles.Body}>
+    <div>
       <div className={styles.Gradation}></div>
       <div className={styles.Allnavcontainer}>
         <div className={styles.Logo}>
