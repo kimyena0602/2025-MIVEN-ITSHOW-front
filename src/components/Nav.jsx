@@ -14,6 +14,7 @@ export default function Nav() {
             <p className={`${styles.Clickhome} ${styles.Clicknav}`}>Home</p>
             <p className={`${styles.Clickbookgallery} ${styles.Clicknav}`}>
               Book Gallery
+              book
             </p>
           </div>
           <div className={styles.Navsecondline}>
