@@ -1,0 +1,70 @@
+.container {
+
+}
+
+.gallery {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;       /* 가운데 정렬 */
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 스크롤바 숨기기 (선택) */
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+/* 책 이미지 스타일
+.image {
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+} */
+
+/* 이미지 크기 및 위치 조정 */
+.sizeXS {
+  height: 160px;
+  margin-top: 276px;
+}
+
+.sizeS {
+  height: 230px;
+  margin-top: 173px;
+}
+
+.sizeM {
+  height: 300px;
+  margin-top: 60px;
+}
+
+/* 중앙 new page 카드 */
+.newPage {
+  width: 235px;
+  height: 353px;
+  background-color: white;
+  /* border-radius: 5px; */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -50px; /* 위치 위로 올림 */
+  z-index: 1;
+}
+
+
+.plus {
+  font-size: 32px;
+  color: #5fa7d2;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 28px;
+  color: #176896;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+}

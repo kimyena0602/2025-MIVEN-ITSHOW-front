@@ -1,10 +1,12 @@
 import MyPageHeader from "./components/MyPageHeader";
 import "./reset.css";
+import SelectBook from "./pages/SelectBook";
 
 function App() {
   return (
     <div className="App">
-      <MyPageHeader />
+      {/* <MyPageHeader /> */}
+      <SelectBook/>
     </div>
   );
 }
