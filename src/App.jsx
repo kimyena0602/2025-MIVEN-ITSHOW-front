@@ -1,13 +1,16 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MyPageHeader from "./components/MyPageHeader";
-import "./reset.css";
 import SelectBook from "./pages/SelectBook";
+import "./reset.css";
 
 function App() {
   return (
-    <div className="App">
-      {/* <MyPageHeader /> */}
-      <SelectBook/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/selectbook" element={<SelectBook />} />
+        <Route path="/mypageheader" element={<MyPageHeader />} />
+      </Routes>
+    </Router>
   );
 }
 
