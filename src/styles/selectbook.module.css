@@ -1,70 +1,73 @@
-.container {
-
+.pageContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
-.gallery {
-  margin-top: 60px;
+.carouselContainer {
+  width: 100%;
+  height: calc(100vh - 300px); /* Nav 영역 피해서 캐러셀 배치 */
   display: flex;
-  justify-content: center;       /* 가운데 정렬 */
-  align-items: flex-start;
-  gap: 20px;
-  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px; /* Nav와 겹치지 않도록 */
+  overflow: hidden;
 }
 
-/* 스크롤바 숨기기 (선택) */
-.gallery::-webkit-scrollbar {
-  display: none;
-}
-
-/* 책 이미지 스타일
-.image {
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  object-fit: cover;
-} */
-
-/* 이미지 크기 및 위치 조정 */
-.sizeXS {
-  height: 160px;
-  margin-top: 276px;
-}
-
-.sizeS {
-  height: 230px;
-  margin-top: 173px;
-}
-
-.sizeM {
-  height: 300px;
-  margin-top: 60px;
-}
-
-/* 중앙 new page 카드 */
-.newPage {
-  width: 235px;
-  height: 353px;
-  background-color: white;
-  /* border-radius: 5px; */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.carousel {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: -50px; /* 위치 위로 올림 */
-  z-index: 1;
 }
 
-
-.plus {
-  font-size: 32px;
-  color: #5fa7d2;
-  margin-bottom: 10px;
+.book {
+  position: absolute;
+  transition: all 0.5s ease;
 }
 
-.text {
-  font-size: 28px;
-  color: #176896;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
+.book img {
+  /* width: 160px;
+  height: auto; */
+  /* margin-left: 290px; */
+  margin-bottom: 190px;
 }
+
+.bookImg1 {
+  width: 150px;
+  margin-left: 100px;
+}
+
+.bookImg2 {
+  width: 180px;
+  margin-left: 130px;
+}
+
+.bookImg3 {
+  width: 220px;
+  margin-left: 160px;
+}
+
+.bookImg4 {
+  width: 220px;
+  margin-left: 400px;
+}
+
+.bookImg5 {
+  width: 180px;
+  margin-left: 500px;
+}
+
+.bookImg6 {
+  width: 150px;
+  margin-left: 600px;
+}
+
+.bookImg7 {
+  width: 250px;
+  height: 450px;
+  margin-left: 250px;
+}
+
