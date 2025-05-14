@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("../assets/fonts/Pretendard.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PretendardL";
+  src: url("../assets/fonts/Pretendard-Light.ttf") format("truetype");
+}
+
+.wrapper {
+  font-family: "Pretendard";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.lowerSection {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  align-items: flex-start;
+}
+
+.profileImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
+  background: #fff;
+}
+
+.nameRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.username {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.subtext {
+  font-family: "PretendardL";
+  font-size: 14px;
+  color: #fff;
+}
+
+.quoteBox {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 24px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  width: 700px;
+  flex: 1;
+}
+
+.quoteTitle {
+  font-family: "Pretendard";
+  color: #15719e;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.quoteText {
+  font-family: "PretendardL";
+  color: #345678;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  font-family: "PretendardL";
+  background: #f2f6fb;
+  border: none;
+  padding: 15.5px 28px;
+  border-radius: 5px;
+  color: #15719e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.music {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 23.5px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #15719e;
+}
+
+.playIcon {
+  font-size: 16px;
+}
+
+.songnameartist {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.artist {
+  font-weight: 100;
+  font-size: 12px;
+  color: #a6a6a6;
+  font-family: "PretendardL";
+}
+
+.songname {
+  font-weight: 500;
+}
