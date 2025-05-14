@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MyPageHeader from "./components/MyPageHeader";
 import SelectBook from "./pages/SelectBook";
+import MyPage from "./pages/MyPage";
 import "./reset.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/selectbook" element={<SelectBook />} />
         <Route path="/mypageheader" element={<MyPageHeader />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </Router>
   );

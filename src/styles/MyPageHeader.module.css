@@ -14,6 +14,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 
 .container {
@@ -21,13 +32,12 @@
   align-items: flex-start;
   gap: 22px;
   margin-top: 40px;
+  position: relative;
+  z-index: 10;
 }
 
-.lowerSection {
-  display: flex;
-  gap: 10px;
-  margin-top: 16px;
-  align-items: flex-start;
+.imageWrapper {
+  position: relative;
 }
 
 .profileImage {
@@ -37,18 +47,40 @@
   object-fit: cover;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
   background: #fff;
+  cursor: pointer;
 }
 
 .nameRow {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
 }
 
 .username {
+  font-family: "Pretendard";
   font-size: 32px;
   font-weight: 700;
   color: white;
+}
+
+.usernameInput {
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.coverColorBtn {
+  background: rgba(255, 255, 255, 0.5);
+  font-family: "PretendardL";
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  color: #15719e;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .subtext {
@@ -57,13 +89,23 @@
   color: #fff;
 }
 
+.lowerSection {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  align-items: flex-start;
+}
+
 .quoteBox {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
   padding: 24px;
   border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   width: 700px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .quoteTitle {
@@ -81,6 +123,41 @@
   font-size: 15px;
 }
 
+.quoteTitleInput {
+  font-size: 18px;
+  font-weight: 600;
+  color: #15719e;
+  border: none;
+  outline: none;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.quoteTextArea {
+  font-size: 15px;
+  color: #345678;
+  font-family: "PretendardL";
+  border: none;
+  outline: none;
+  padding: 6px;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.completeBtn {
+  align-self: flex-end;
+  background-color: #777;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-family: "PretendardL";
+  cursor: pointer;
+  margin-top: 8px;
+}
+
 .actionSection {
   display: flex;
   flex-direction: column;
@@ -91,19 +168,23 @@
 .buttons {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 .btn {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
   font-family: "PretendardL";
-  background: #f2f6fb;
   border: none;
-  padding: 15.5px 28px;
+  padding: 15.5px 77px 15.5px 20px;
   border-radius: 5px;
   color: #15719e;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 65px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .icon {
@@ -111,7 +192,8 @@
 }
 
 .music {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
   padding: 23.5px 20px;
   border-radius: 5px;
   display: flex;
