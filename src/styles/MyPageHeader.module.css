@@ -138,6 +138,7 @@
   color: #345678;
   line-height: 1.5;
   font-size: 15px;
+  height: 45px;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
