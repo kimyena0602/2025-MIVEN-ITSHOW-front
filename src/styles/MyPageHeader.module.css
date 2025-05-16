@@ -18,7 +18,7 @@
 }
 
 .overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -53,7 +53,8 @@
 .nameRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  margin-bottom: 3px;
+  gap: 5px;
 }
 
 .username {
@@ -68,17 +69,21 @@
   font-weight: 700;
   padding: 6px 10px;
   border-radius: 5px;
-  border: none;
+  border: 0.6px solid #fff;
+  background: none;
+  color: #fff;
   outline: none;
+  width: 250px;
 }
 
 .coverColorBtn {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.9);
   font-family: "PretendardL";
   border: none;
-  padding: 8px 14px;
+  padding: 16.5px 26px;
   border-radius: 5px;
-  color: #15719e;
+  color: #6f6f6f;
+  z-index: 100;
   font-size: 14px;
   cursor: pointer;
 }
@@ -102,10 +107,18 @@
   padding: 24px;
   border-radius: 6px;
   width: 700px;
+  min-height: 85px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
   gap: 10px;
+}
+
+.editingQuoteBox {
+  background: white !important;
+  z-index: 10;
 }
 
 .quoteTitle {
@@ -116,42 +129,53 @@
   font-weight: 600;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .quoteText {
   font-family: "PretendardL";
   color: #345678;
   line-height: 1.5;
   font-size: 15px;
+  height: 45px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .quoteTitleInput {
   font-size: 18px;
   font-weight: 600;
   color: #15719e;
-  border: none;
-  outline: none;
   padding: 6px;
   border-radius: 4px;
+  border: 0.6px solid #6f6f6f;
+  background: none;
+  width: 250px;
+  outline: none;
 }
 
 .quoteTextArea {
   font-size: 15px;
   color: #345678;
   font-family: "PretendardL";
-  border: none;
-  outline: none;
   padding: 6px;
   border-radius: 4px;
-  resize: vertical;
+  resize: none;
+  height: 123px;
   min-height: 60px;
+  outline: none;
+  border: 0.6px solid #6f6f6f;
+  background: none;
 }
 
 .completeBtn {
   align-self: flex-end;
-  background-color: #777;
+  background-color: #6f6f6f;
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 10px 24px;
+  border-radius: 4px;
+  padding: 10px 32px;
   font-size: 14px;
   font-family: "PretendardL";
   cursor: pointer;
@@ -176,7 +200,7 @@
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
   font-family: "PretendardL";
   border: none;
-  padding: 15.5px 77px 15.5px 20px;
+  padding: 20.5px 77px 20.5px 20px;
   border-radius: 5px;
   color: #15719e;
   display: flex;
@@ -200,6 +224,8 @@
   align-items: center;
   gap: 12px;
   color: #15719e;
+  position: relative;
+  z-index: 10;
 }
 
 .playIcon {

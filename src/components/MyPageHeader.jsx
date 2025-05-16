@@ -84,7 +84,7 @@ export default function MyPageHeader() {
                   value={editedUsername}
                   onChange={(e) => setEditedUsername(e.target.value)}
                 />
-                <button className={styles.coverColorBtn}>커버 색상</button>
+                <button className={styles.coverColorBtn}>커버색상</button>
                 <span className={styles.subtext}>
                   작성한 구절 {data.user.quoteCount}개
                 </span>
@@ -100,7 +100,11 @@ export default function MyPageHeader() {
           </div>
 
           <div className={styles.lowerSection}>
-            <div className={styles.quoteBox}>
+            <div
+              className={`${styles.quoteBox} ${
+                isEditing ? styles.editingQuoteBox : ""
+              }`}
+            >
               {isEditing ? (
                 <>
                   <input
@@ -136,7 +140,14 @@ export default function MyPageHeader() {
                 </button>
               </div>
 
-              <div className={styles.music}>
+              <div
+                className={styles.music}
+                style={{
+                  backgroundColor: isEditing
+                    ? "rgba(255, 255, 255, 0.9)"
+                    : "rgba(255, 255, 255, 0.5)",
+                }}
+              >
                 <FaPlay className={styles.playIcon} />
                 <span className={styles.songnameartist}>
                   <p className={styles.songname}>{data.music.song}</p>
