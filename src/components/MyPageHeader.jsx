@@ -3,6 +3,7 @@ import Nav from "../components/Nav";
 import styles from "../styles/MyPageHeader.module.css";
 import { FiSettings } from "react-icons/fi";
 import { FaPlay } from "react-icons/fa";
+import { FiCamera } from "react-icons/fi";
 
 export default function MyPageHeader() {
   const [data, setData] = useState(null);
@@ -55,6 +56,11 @@ export default function MyPageHeader() {
       {isEditing && <div className={styles.overlay}></div>}
       <div className={styles.container}>
         <div className={styles.imageWrapper}>
+          {isEditing && (
+            <label htmlFor="imageUpload" className={styles.cameraIconWrapper}>
+              <FiCamera className={styles.cameraIcon} />
+            </label>
+          )}
           <label htmlFor="imageUpload">
             <img
               src={
