@@ -92,6 +92,7 @@
   font-family: "PretendardL";
   font-size: 14px;
   color: #fff;
+  margin-left: 10px;
 }
 
 .lowerSection {
@@ -123,7 +124,6 @@
 
 .quoteTitle {
   font-family: "Pretendard";
-  color: #15719e;
   margin-bottom: 8px;
   font-size: 18px;
   font-weight: 600;
@@ -135,7 +135,6 @@
 
 .quoteText {
   font-family: "PretendardL";
-  color: #345678;
   line-height: 1.5;
   font-size: 15px;
   height: 45px;
@@ -146,7 +145,6 @@
 .quoteTitleInput {
   font-size: 18px;
   font-weight: 600;
-  color: #15719e;
   padding: 6px;
   border-radius: 4px;
   border: 0.6px solid #6f6f6f;
@@ -202,7 +200,6 @@
   border: none;
   padding: 20.5px 77px 20.5px 20px;
   border-radius: 5px;
-  color: #15719e;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -223,7 +220,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #15719e;
   position: relative;
   z-index: 10;
 }
@@ -266,4 +262,79 @@
   width: 20px;
   height: 20px;
   color: #555;
+}
+
+.colorPicker {
+  position: absolute;
+  top: 0px;
+  left: 610px;
+  background: white;
+  padding: 16px;
+  border-radius: 4px;
+  display: grid;
+  gap: 8px;
+  z-index: 999;
+}
+
+.colorBox {
+  width: 102px;
+  height: 62px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.moreColors {
+  grid-column: span 4;
+  text-align: right;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: #6f6f6f;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  font-family: "PretendardL";
+  justify-content: flex-end;
+  cursor: pointer;
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.gradientDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 98deg at 50% 50%,
+    #dc1717 0deg,
+    #ff4d00 77.4deg,
+    #ffec45 136.8deg,
+    #008d1f 199.8deg,
+    #2f4878 232.2deg,
+    #ad00ff 271.8deg
+  );
+}
+
+.customColorInputWrapper {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.colorInput {
+  width: 60px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+}
+
+.applyBtn {
+  background-color: #6f6f6f;
+  color: white;
+  border: none;
+  font-family: "PretendardL";
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
 }
