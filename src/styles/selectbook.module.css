@@ -25,49 +25,14 @@
 
 .book {
   position: absolute;
-  transition: all 0.5s ease;
+  transition: transform 0.6s ease, z-index 0.6s ease;
 }
 
-.book img {
-  /* width: 160px;
-  height: auto; */
-  /* margin-left: 290px; */
+.bookImg {
+  width: 200px;
+  height: auto;
+  max-height: 450px;
   margin-bottom: 190px;
-}
-
-.bookImg1 {
-  width: 150px;
-  margin-left: 100px;
-}
-
-.bookImg2 {
-  width: 180px;
-  margin-left: 130px;
-}
-
-.bookImg3 {
-  width: 220px;
-  margin-left: 160px;
-}
-
-.bookImg4 {
-  width: 220px;
-  margin-left: 400px;
-}
-
-.bookImg5 {
-  width: 180px;
-  margin-left: 500px;
-}
-
-.bookImg6 {
-  width: 150px;
-  margin-left: 600px;
-}
-
-.bookImg7 {
-  width: 250px;
-  height: 450px;
-  margin-left: 250px;
+  transition: all 0.6s ease;
 }
 
