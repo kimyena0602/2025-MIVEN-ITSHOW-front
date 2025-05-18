@@ -4,6 +4,9 @@ import styles from "../styles/MyPageHeader.module.css";
 import { FiSettings } from "react-icons/fi";
 import { FaPlay } from "react-icons/fa";
 import { FiCamera } from "react-icons/fi";
+import { useCoverColor } from "../contexts/CoverColorContext";
+import { HexColorPicker } from "react-colorful";
+import "../global.css";
 
 export default function MyPageHeader() {
   const [data, setData] = useState(null);
@@ -12,6 +15,18 @@ export default function MyPageHeader() {
   const [editedUsername, setEditedUsername] = useState("");
   const [editedQuoteTitle, setEditedQuoteTitle] = useState("");
   const [editedQuoteText, setEditedQuoteText] = useState("");
+  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState("#15719E");
+  const [showCustomColorInput, setShowCustomColorInput] = useState(false);
+  const [customColor, setCustomColor] = useState("#15719E");
+
+  const { setCoverColor } = useCoverColor();
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    setCoverColor(color);
+    setIsColorPickerOpen(false);
+  };
 
   useEffect(() => {
     fetch("/data/mypageheaderData.json")
@@ -90,7 +105,64 @@ export default function MyPageHeader() {
                   value={editedUsername}
                   onChange={(e) => setEditedUsername(e.target.value)}
                 />
-                <button className={styles.coverColorBtn}>커버색상</button>
+                <button
+                  className={styles.coverColorBtn}
+                  onClick={() => setIsColorPickerOpen(!isColorPickerOpen)}
+                >
+                  커버색상
+                </button>
+                {isColorPickerOpen && (
+                  <div className={styles.colorPicker}>
+                    {[
+                      "#b4005c",
+                      "#e85454",
+                      "#b681f2",
+                      "#5f6d4e",
+                      "#ffaa00",
+                      "#89e1ff",
+                      "#f4b2bc",
+                      "#ffcfff",
+                      "#4cb8b3",
+                      "#c275b7",
+                      "#e65c00",
+                      "#1561b3",
+                      "#b28f85",
+                      "#ffe600",
+                      "#444c6a",
+                      "#c90000",
+                    ].map((color) => (
+                      <div
+                        key={color}
+                        className={styles.colorBox}
+                        style={{ backgroundColor: color }}
+                        onClick={() => handleColorSelect(color)}
+                      />
+                    ))}
+                    <div
+                      className={styles.moreColors}
+                      onClick={() =>
+                        setShowCustomColorInput(!showCustomColorInput)
+                      }
+                    >
+                      <div className={styles.gradientDot}></div>
+                      더보기 +
+                    </div>
+                    {showCustomColorInput && (
+                      <div className={styles.customColorInputWrapper}>
+                        <HexColorPicker
+                          color={customColor}
+                          onChange={setCustomColor}
+                        />
+                        <button
+                          className={styles.applyBtn}
+                          onClick={() => handleColorSelect(customColor)}
+                        >
+                          적용
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
                 <span className={styles.subtext}>
                   작성한 구절 {data.user.quoteCount}개
                 </span>
@@ -117,11 +189,13 @@ export default function MyPageHeader() {
                     className={styles.quoteTitleInput}
                     value={editedQuoteTitle}
                     onChange={(e) => setEditedQuoteTitle(e.target.value)}
+                    style={{ color: selectedColor }}
                   />
                   <textarea
                     className={styles.quoteTextArea}
                     value={editedQuoteText}
                     onChange={(e) => setEditedQuoteText(e.target.value)}
+                    style={{ color: selectedColor }}
                   />
                   <button className={styles.completeBtn} onClick={handleSave}>
                     완료
@@ -129,8 +203,18 @@ export default function MyPageHeader() {
                 </>
               ) : (
                 <>
-                  <h3 className={styles.quoteTitle}>{data.quote.title}</h3>
-                  <p className={styles.quoteText}>{data.quote.text}</p>
+                  <h3
+                    className={styles.quoteTitle}
+                    style={{ color: selectedColor }}
+                  >
+                    {data.quote.title}
+                  </h3>
+                  <p
+                    className={styles.quoteText}
+                    style={{ color: selectedColor }}
+                  >
+                    {data.quote.text}
+                  </p>
                 </>
               )}
             </div>
@@ -140,6 +224,7 @@ export default function MyPageHeader() {
                 <button
                   className={styles.btn}
                   onClick={() => setIsEditing(!isEditing)}
+                  style={{ color: selectedColor }}
                 >
                   <FiSettings className={styles.icon} />
                   프로필 편집
@@ -152,6 +237,7 @@ export default function MyPageHeader() {
                   backgroundColor: isEditing
                     ? "rgba(255, 255, 255, 0.9)"
                     : "rgba(255, 255, 255, 0.5)",
+                  color: selectedColor,
                 }}
               >
                 <FaPlay className={styles.playIcon} />
