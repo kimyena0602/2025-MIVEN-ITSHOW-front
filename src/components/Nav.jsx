@@ -1,10 +1,18 @@
 import React from "react";
 import styles from "../styles/Nav.module.css";
+import { useCoverColor } from "../contexts/CoverColorContext";
 
 export default function Nav() {
+  const { coverColor } = useCoverColor();
+
   return (
     <div>
-      <div className={styles.Gradation}></div>
+      <div
+        className={styles.Gradation}
+        style={{
+          background: `linear-gradient(180deg, ${coverColor} 0%, #fff 100%)`,
+        }}
+      ></div>
       <div className={styles.Allnavcontainer}>
         <div className={styles.Logo}>
           <p className={styles.Clicklogo}>LOGO</p>

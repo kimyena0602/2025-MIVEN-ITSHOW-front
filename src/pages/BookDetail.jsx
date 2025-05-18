@@ -1,1 +1,0 @@
-// BookGallery => BookDetail ( 책 표지 사진, 책 정보, 리뷰, 인상 깊은 구절, 후기 등 )
