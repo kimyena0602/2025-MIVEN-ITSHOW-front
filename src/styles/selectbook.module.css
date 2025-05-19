@@ -21,8 +21,6 @@
 }
 
 .book img {
-  width: 200px;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 280px;
+  height: 380px;
 }

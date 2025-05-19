@@ -33,6 +33,7 @@ const SelectBook = () => {
   };
 
   // 키보드 이벤트
+  useEffect(() => {
   const handleKeyDown = (e) => {
     if (e.key === "ArrowLeft") {
       setCenterIndex((prev) => (prev - 1 + books.length) % books.length);
@@ -41,25 +42,54 @@ const SelectBook = () => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  const handleWheel = (e) => {
+    if (e.deltaY > 0) {
+      // 아래로 스크롤하면 오른쪽으로
+      setCenterIndex((prev) => (prev + 1) % books.length);
+    } else if (e.deltaY < 0) {
+      // 위로 스크롤하면 왼쪽으로
+      setCenterIndex((prev) => (prev - 1 + books.length) % books.length);
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+  window.addEventListener("wheel", handleWheel, { passive: true });
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+    window.removeEventListener("wheel", handleWheel);
+  };
+}, []);
+
 
   return (
     <div className={styles.pageContainer}>
       <Nav />
       <div className={styles.bookContainer}>
-        {books.map((book, index) => {
+          {books.map((book, index) => {
           const offset = getOffset(index);
           const absOffset = Math.abs(offset);
 
-          const baseX = 160;
-          const scaleMap = [0.6, 0.75, 0.9, 1.2];
-          const yMap = [50, 30, 15, 0];
+          // 기본 X 간격
+          let baseX = 320;
 
-          const scale = scaleMap[absOffset] || 0;
-          const translateY = yMap[absOffset] || 60;
+          // 중앙 양옆은 넓히기
+          if (absOffset === 1) baseX += 35;
+
+          // 양끝쪽은 좁히기 (1-2번째, 5-6번째)
+          if (absOffset === 2 || absOffset === 3) baseX -= 2;
+
+          if (absOffset === 3 || absOffset === 4) baseX -= 25;
+
+          // 기본 위치 조절값들
+          const scaleMap = [1.2, 0.9, 0.75, 0.6];
+          const yMap = [-15, 80, 160, 230];
+
+          let scale = scaleMap[absOffset] || 0;
+          let translateY = yMap[absOffset] || 120;
+
+          // 양끝 이미지 좀만 위로 올리기
+          if (absOffset === 2 || absOffset === 3) translateY -= 2;
 
           const zIndex = 10 - absOffset;
           const opacity = absOffset > 3 ? 0 : 1;
@@ -79,6 +109,7 @@ const SelectBook = () => {
             </div>
           );
         })}
+
       </div>
     </div>
   );
