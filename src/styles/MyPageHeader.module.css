@@ -1,0 +1,340 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("../assets/fonts/Pretendard.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PretendardL";
+  src: url("../assets/fonts/Pretendard-Light.ttf") format("truetype");
+}
+
+.wrapper {
+  font-family: "Pretendard";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 10;
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.profileImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
+  background: #fff;
+  cursor: pointer;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  gap: 5px;
+}
+
+.username {
+  font-family: "Pretendard";
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.usernameInput {
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 0.6px solid #fff;
+  background: none;
+  color: #fff;
+  outline: none;
+  width: 250px;
+}
+
+.coverColorBtn {
+  background: rgba(255, 255, 255, 0.9);
+  font-family: "PretendardL";
+  border: none;
+  padding: 16.5px 26px;
+  border-radius: 5px;
+  color: #6f6f6f;
+  z-index: 100;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.subtext {
+  font-family: "PretendardL";
+  font-size: 14px;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.lowerSection {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  align-items: flex-start;
+}
+
+.quoteBox {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  border-radius: 6px;
+  width: 700px;
+  min-height: 85px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  gap: 10px;
+}
+
+.editingQuoteBox {
+  background: white !important;
+  z-index: 10;
+}
+
+.quoteTitle {
+  font-family: "Pretendard";
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.quoteText {
+  font-family: "PretendardL";
+  line-height: 1.5;
+  font-size: 15px;
+  height: 45px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.quoteTitleInput {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 4px;
+  border: 0.6px solid #6f6f6f;
+  background: none;
+  width: 250px;
+  outline: none;
+}
+
+.quoteTextArea {
+  font-size: 15px;
+  color: #345678;
+  font-family: "PretendardL";
+  padding: 6px;
+  border-radius: 4px;
+  resize: none;
+  height: 123px;
+  min-height: 60px;
+  outline: none;
+  border: 0.6px solid #6f6f6f;
+  background: none;
+}
+
+.completeBtn {
+  align-self: flex-end;
+  background-color: #6f6f6f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 32px;
+  font-size: 14px;
+  font-family: "PretendardL";
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  font-family: "PretendardL";
+  border: none;
+  padding: 20.5px 77px 20.5px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 65px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.music {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  padding: 23.5px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 10;
+}
+
+.playIcon {
+  font-size: 16px;
+}
+
+.songnameartist {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.artist {
+  font-weight: 100;
+  font-size: 12px;
+  color: #a6a6a6;
+  font-family: "PretendardL";
+}
+
+.songname {
+  font-weight: 500;
+}
+
+.cameraIconWrapper {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  padding: 9px;
+  cursor: pointer;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+}
+
+.cameraIcon {
+  width: 20px;
+  height: 20px;
+  color: #555;
+}
+
+.colorPicker {
+  position: absolute;
+  top: 0px;
+  left: 610px;
+  background: white;
+  padding: 16px;
+  border-radius: 4px;
+  display: grid;
+  gap: 8px;
+  z-index: 999;
+}
+
+.colorBox {
+  width: 102px;
+  height: 62px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.moreColors {
+  grid-column: span 4;
+  text-align: right;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: #6f6f6f;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  font-family: "PretendardL";
+  justify-content: flex-end;
+  cursor: pointer;
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.gradientDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 98deg at 50% 50%,
+    #dc1717 0deg,
+    #ff4d00 77.4deg,
+    #ffec45 136.8deg,
+    #008d1f 199.8deg,
+    #2f4878 232.2deg,
+    #ad00ff 271.8deg
+  );
+}
+
+.customColorInputWrapper {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.colorInput {
+  width: 60px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+}
+
+.applyBtn {
+  background-color: #6f6f6f;
+  color: white;
+  border: none;
+  font-family: "PretendardL";
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}

@@ -3,3 +3,7 @@ body {
   height: 100vh;
   box-content: border-box;
 }
+
+.react-colorful {
+  width: 440px !important;
+}

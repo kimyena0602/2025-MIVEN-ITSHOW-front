@@ -1,11 +1,21 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MyPageHeader from "./components/MyPageHeader";
-import "./reset.css";
+import { CoverColorProvider } from "./contexts/CoverColorContext";
+import SelectBook from "./pages/SelectBook";
+import MyPage from "./pages/MyPage";
+import "./global.css";
 
 function App() {
   return (
-    <div className="App">
-      <MyPageHeader />
-    </div>
+    <CoverColorProvider>
+      <Router>
+        <Routes>
+          <Route path="/selectbook" element={<SelectBook />} />
+          <Route path="/mypageheader" element={<MyPageHeader />} />
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </Router>
+    </CoverColorProvider>
   );
 }
 
