@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import styles from "../styles/selectbook.module.css";
 import Nav from "../components/Nav";
@@ -13,9 +12,10 @@ import img7 from "../assets/images/selectbook6.png";
 
 const SelectBook = () => {
   const [centerIndex, setCenterIndex] = useState(0);
+  const [canScroll, setCanScroll] = useState(true); // ⬅️ 스크롤/키 입력 딜레이
 
   const books = [
-    { id: 1, title: "Book 1", image: img1 }, // new page
+    { id: 1, title: "Book 1", image: img1 },
     { id: 2, title: "Book 2", image: img2 },
     { id: 3, title: "Book 3", image: img3 },
     { id: 4, title: "Book 4", image: img4 },
@@ -26,8 +26,7 @@ const SelectBook = () => {
 
   const isNewPageCenter = books[centerIndex].title === "Book 1";
 
-  // 무한 순환
-  const getOffset = (index: number) => {
+  const getOffset = (index) => {
     let offset = index - centerIndex;
     const half = Math.floor(books.length / 2);
     if (offset > half) offset -= books.length;
@@ -35,22 +34,28 @@ const SelectBook = () => {
     return offset;
   };
 
-  // 키보드 및 휠 이벤트
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        setCenterIndex((prev) => (prev - 1 + books.length) % books.length);
-      } else if (e.key === "ArrowRight") {
-        setCenterIndex((prev) => (prev + 1) % books.length);
-      }
+    const scrollDelay = 300; // 밀리초 (0.3초) 딜레이
+
+    const handleMove = (direction) => {
+      if (!canScroll) return;
+      setCanScroll(false);
+      setCenterIndex((prev) =>
+        direction === "left"
+          ? (prev - 1 + books.length) % books.length
+          : (prev + 1) % books.length
+      );
+      setTimeout(() => setCanScroll(true), scrollDelay);
     };
 
-    const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0) {
-        setCenterIndex((prev) => (prev + 1) % books.length);
-      } else if (e.deltaY < 0) {
-        setCenterIndex((prev) => (prev - 1 + books.length) % books.length);
-      }
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowLeft") handleMove("left");
+      else if (e.key === "ArrowRight") handleMove("right");
+    };
+
+    const handleWheel = (e) => {
+      if (e.deltaY > 0) handleMove("right");
+      else if (e.deltaY < 0) handleMove("left");
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -60,7 +65,7 @@ const SelectBook = () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("wheel", handleWheel);
     };
-  }, [books.length]);
+  }, [canScroll, books.length]);
 
   return (
     <div className={styles.pageContainer}>
@@ -70,13 +75,13 @@ const SelectBook = () => {
           const offset = getOffset(index);
           const absOffset = Math.abs(offset);
 
-          let baseX = 320;
-          if (absOffset === 1) baseX += 35;
-          if (absOffset === 2 || absOffset === 3) baseX -= 2;
-          if (absOffset === 3 || absOffset === 4) baseX -= 25;
+          let baseX = 230;
+          if (absOffset === 1) baseX += 25;
+          if (absOffset === 2 || absOffset === 3) baseX -= 1;
+          if (absOffset === 3 || absOffset === 4) baseX -= 16;
 
           const scaleMap = [1.2, 0.9, 0.75, 0.6];
-          const yMap = [-15, 80, 160, 230];
+          const yMap = [-140, -60, 1, 70];
 
           const scale = scaleMap[absOffset] || 0;
           let translateY = yMap[absOffset] || 120;
@@ -102,16 +107,15 @@ const SelectBook = () => {
         })}
 
         <div className={styles.iconContainer}>
-  {isNewPageCenter ? (
-    <div className={styles.plusIconCenter}>＋</div>
-  ) : (
-    <>
-      <div className={styles.editIconCenter}>✎</div>
-      <div className={styles.plusIconBottomRight}>＋</div>
-    </>
-  )}
-</div>
-
+          {isNewPageCenter ? (
+            <div className={styles.plusIconCenter}>＋</div>
+          ) : (
+            <>
+              <div className={styles.editIconCenter}>✎</div>
+              <div className={styles.plusIconBottomRight}>＋</div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
