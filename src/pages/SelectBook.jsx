@@ -2,26 +2,26 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/selectbook.module.css";
 import Nav from "../components/Nav";
 
-import img1 from "../assets/images/newpage.png";
-import img2 from "../assets/images/selectbook1.png";
-import img3 from "../assets/images/selectbook2.png";
-import img4 from "../assets/images/selectbook3.png";
-import img5 from "../assets/images/selectbook4.png";
-import img6 from "../assets/images/selectbook5.png";
-import img7 from "../assets/images/selectbook6.png";
+// import img1 from "assets/images/newpage.png";
+// import img2 from "/assets/images/selectbook1.png";
+// import img3 from "/assets/images/selectbook2.png";
+// import img4 from "/assets/images/selectbook3.png";
+// import img5 from "/assets/images/selectbook4.png";
+// import img6 from "/assets/images/selectbook5.png";
+// import img7 from "/assets/images/selectbook6.png";
 
 const SelectBook = () => {
   const [centerIndex, setCenterIndex] = useState(0);
   const [canScroll, setCanScroll] = useState(true); // ⬅️ 스크롤/키 입력 딜레이
 
   const books = [
-    { id: 1, title: "Book 1", image: img1 },
-    { id: 2, title: "Book 2", image: img2 },
-    { id: 3, title: "Book 3", image: img3 },
-    { id: 4, title: "Book 4", image: img4 },
-    { id: 5, title: "Book 5", image: img5 },
-    { id: 6, title: "Book 6", image: img6 },
-    { id: 7, title: "Book 7", image: img7 },
+    { id: 1, title: "Book 1", image: "assets/images/newpage.png" },
+    { id: 2, title: "Book 2", image: "assets/images/selectbook1.png" },
+    { id: 3, title: "Book 3", image: "assets/images/selectbook2.png" },
+    { id: 4, title: "Book 4", image: "assets/images/selectbook3.png" },
+    { id: 5, title: "Book 5", image: "assets/images/selectbook4.png" },
+    { id: 6, title: "Book 6", image: "assets/images/selectbook5.png" },
+    { id: 7, title: "Book 7", image: "assets/images/selectbook6.png" },
   ];
 
   const isNewPageCenter = books[centerIndex].title === "Book 1";
