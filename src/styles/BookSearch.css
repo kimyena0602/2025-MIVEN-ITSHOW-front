@@ -1,0 +1,156 @@
+.booksearch-container {
+    min-height: 100vh;
+    background-color: white;
+    position: relative;
+    padding-top: 600px; /* 이미지 높이(486px) + 여유 공간 약 114px */
+  }
+  
+  .booksearch-top-image {
+    position: absolute;
+    top: 53px;
+    left: 324px;
+    width: 1000px;
+    height: 400px;
+    z-index: 40;
+  }
+  
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    padding: 3rem 5rem;
+    place-items: center;
+  }
+  
+  .blurred {
+    filter: blur(4px) brightness(0.5);
+  }
+  
+  .booksearch-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    padding-top: 600px; /* 동일한 상단 공간 확보 */
+  }
+  
+  .dim-background {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+  }
+  
+  .booksearch-input-wrapper {
+    position: absolute;
+    top: 300px; /* 필요 시 여기도 조정 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+  }
+  
+  .booksearch-input {
+    width: 24rem;
+    padding: 1rem 1.25rem;
+    border-radius: 9999px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+  }
+  
+  .search-results {
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    z-index: 30;
+    padding: 600px 2.5rem 2.5rem; /* 상단에 여유 공간 추가 */
+  }
+  
+  .results-title {
+    color: #1e3a8a;
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .search-input-container {
+    position: absolute;
+    top: 600px; /* 이미지 바로 아래 위치하도록 설정 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+  }
+  
+  .search-input {
+    width: 24rem;
+    padding: 1rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    padding: 3rem 5rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    place-items: center;
+  }
+  
+  .no-results-text {
+    grid-column: span 5;
+    text-align: center;
+    color: #6b7280;
+  }
+  .search-input-container {
+    position: absolute;
+    top: 630px; /* 이미지 기준 아래 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-input-wrapper {
+    position: relative;
+    width: 24rem;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    top: 0; /* 수직 가운데 정렬은 아래 input의 padding-top과 맞춰줌 */
+    left: 0;
+    margin-top: 12px; /* 미세 조정 가능 */
+    margin-left: 8px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    padding-left: 3rem; /* 아이콘 공간 확보 */
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+  

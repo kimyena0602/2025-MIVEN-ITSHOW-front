@@ -79,7 +79,7 @@ export default function MyPageHeader() {
           <label htmlFor="imageUpload">
             <img
               src={
-                selectedImage || require("../assets/images/Mypagepicture.png")
+                selectedImage || "assets/images/Mypagepicture.png"
               }
               alt="프로필"
               className={styles.profileImage}
