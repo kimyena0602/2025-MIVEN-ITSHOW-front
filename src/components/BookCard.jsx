@@ -1,12 +1,9 @@
-// src/components/BookCard.jsx
-import React from 'react';
-
 const BookCard = ({ image, title, author }) => {
   return (
-    <div className="w-[120px] text-center">
-      <img src={image} alt={title} className="w-full h-[170px] object-cover rounded" />
-      <p className="mt-2 text-sm font-semibold">{title}</p>
-      <p className="text-xs text-gray-500">{author}</p>
+    <div className="w-full max-w-[200px]">
+      <img src={image} alt={title} className="w-full h-auto rounded-lg shadow" />
+      <h3 className="text-center mt-2 font-semibold">{title}</h3>
+      <p className="text-center text-sm text-gray-500">{author}</p>
     </div>
   );
 };
