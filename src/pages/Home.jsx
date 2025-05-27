@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from '../components/Nav';
 import '../styles/Home.css';
-import { images } from '../assets/images';
+import { images } from '../../public/assets/images';
 import SearchBar from '../components/SearchBar';
 
 function Home() {

@@ -4,6 +4,7 @@ import { CoverColorProvider } from "./contexts/CoverColorContext";
 import SelectBook from "./pages/SelectBook";
 import MyPage from "./pages/MyPage";
 import "./global.css";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/selectbook" element={<SelectBook />} />
           <Route path="/mypageheader" element={<MyPageHeader />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/Home" element={<Home />} />
         </Routes>
       </Router>
     </CoverColorProvider>
