@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../components/Nav";
-import "../styles/Home.css";
+import styles from "../styles/Home.module.css";
 // import { images } from "/public/assets/Book_img6.png";
 import SearchBar from "../components/SearchBar";
 
