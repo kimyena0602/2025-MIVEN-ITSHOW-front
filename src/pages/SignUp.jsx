@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/SignUp.css";
+import styles from "../styles/SignUp.module.css";
 import personImg from "../assets/images/person.png";
 import lockImg from "../assets/images/lock.png";
 import eyeonImg from "../assets/images/eyeon.png";
@@ -20,11 +20,11 @@ function SignUp() {
   };
 
   return (
-    <form className="signup-container" onSubmit={handleSubmit}>
-      <h2 className="title">회원가입</h2>
+    <form className={styles.signupContainer} onSubmit={handleSubmit}>
+      <h2 className={styles.title}>회원가입</h2>
 
-      <div className="input-group-box">
-        <div className="input-line">
+      <div className={styles.inputGroupBox}>
+        <div className={styles.inputLine}>
           <img src={personImg} alt="아이디" />
           <input
             type="text"
@@ -36,7 +36,7 @@ function SignUp() {
           />
         </div>
 
-        <div className="input-line">
+        <div className={styles.inputLine}>
           <img src={lockImg} alt="비밀번호" />
           <input
             type={showPassword ? "text" : "password"}
@@ -49,12 +49,12 @@ function SignUp() {
           <img
             src={showPassword ? eyeoffImg : eyeonImg}
             alt="비밀번호 보기"
-            className="eye-toggle"
+            className={styles.eyeToggle}
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
 
-        <div className="input-line">
+        <div className={styles.inputLine}>
           <img src={mailImg} alt="이메일" />
           <input
             type="email"
@@ -67,7 +67,7 @@ function SignUp() {
         </div>
       </div>
 
-      <button className="signup-button" type="submit">
+      <button className={styles.signupButton} type="submit">
         회원가입
       </button>
     </form>
