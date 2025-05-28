@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import MyPage from "./pages/MyPage";
 import "./global.css";
 import Home from "./pages/Home";
+import BookSearch from "./pages/BookSearch";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route path="/mypageheader" element={<MyPageHeader />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/signup" element={<SignUp /> } />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/booksearch" element={<BookSearch />} />
         </Routes>
       </Router>
     </CoverColorProvider>

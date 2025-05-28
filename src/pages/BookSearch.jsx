@@ -1,43 +1,42 @@
-import React, { useState } from 'react';
-import BookCard from '../components/BookCard';
-import booksData from '../data/book.json';
-import '../styles/BookSearch.css';
+import React, { useState } from "react";
+import BookCard from "../components/BookCard";
+import booksData from "../data/book.json";
+import styles from "../styles/BookSearch.module.css";
 
 const BookSearch = () => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
-  const hasQuery = query.trim() !== '';
-  const filteredBooks = booksData.filter(book =>
+  const hasQuery = query.trim() !== "";
+  const filteredBooks = booksData.filter((book) =>
     book.title.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
-    <div className="booksearch-container">
+    <div className={styles.booksearchContainer}>
       {/* 상단 이미지: 항상 표시 */}
       <img
         src="/assets/images/Book Search.png"
         alt="Book Search"
-        className="booksearch-top-image"
+        className={styles.booksearchTopImage}
       />
-
 
       <img
         src="/assets/images/Book Search2.png"
         alt="Book Search 2"
-        className="booksearch-top-image2"
+        className={styles.booksearchTopImage2}
       />
 
       {/* 검색창 - 항상 하나 */}
-      <div className="booksearch-input-container">
-        <div className="search-input-wrapper">
+      <div className={styles.booksearchInputContainer}>
+        <div className={styles.searchInputWrapper}>
           <img
             src="/assets/images/search-icon.png"
             alt="Search Icon"
-            className="search-icon"
+            className={styles.searchIcon}
           />
           <input
             type="text"
-            className="booksearch-input"
+            className={styles.booksearchInput}
             placeholder="책 제목을 입력해 주세요"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -48,23 +47,33 @@ const BookSearch = () => {
       {/* 배경 흐림 + 딤처리 (검색어 없을 때) */}
       {!hasQuery && (
         <>
-          <div className="book-grid blurred">
+          <div className={styles.bookGrid + " " + styles.blurred}>
             {booksData.map((book, idx) => (
-              <BookCard key={idx} image={book.image} title={book.title} author={book.author} />
+              <BookCard
+                key={idx}
+                image={book.image}
+                title={book.title}
+                author={book.author}
+              />
             ))}
           </div>
-          <div className="dim-overlay"></div>
+          <div className={styles.dimOverlay}></div>
         </>
       )}
 
       {/* 검색어 있을 때 결과 출력 */}
       {hasQuery && (
-        <div className="results-grid">
+        <div className={styles.resultsGrid}>
           {filteredBooks.map((book, idx) => (
-            <BookCard key={idx} image={book.image} title={book.title} author={book.author} />
+            <BookCard
+              key={idx}
+              image={book.image}
+              title={book.title}
+              author={book.author}
+            />
           ))}
           {filteredBooks.length === 0 && (
-            <p className="no-results-text">검색 결과가 없습니다.</p>
+            <p className={styles.noResultsText}>검색 결과가 없습니다.</p>
           )}
         </div>
       )}
