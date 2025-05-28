@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
-import '../styles/SignUp.css'
+import React, { useState } from "react";
+import "../styles/SignUp.css";
+import personImg from "../assets/images/person.png";
+import lockImg from "../assets/images/lock.png";
+import eyeonImg from "../assets/images/eyeon.png";
+import eyeoffImg from "../assets/images/eyeoff.png";
+import mailImg from "../assets/images/mail.png";
 
 function SignUp() {
-  const [form, setForm] = useState({ username: '', password: '', email: '' })
-  const [showPassword, setShowPassword] = useState(false)
+  const [form, setForm] = useState({ username: "", password: "", email: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('회원가입 완료!')
-  }
+    e.preventDefault();
+    alert("회원가입 완료!");
+  };
 
   return (
     <form className="signup-container" onSubmit={handleSubmit}>
@@ -20,7 +25,7 @@ function SignUp() {
 
       <div className="input-group-box">
         <div className="input-line">
-          <img src="/src/assets/images/person.png" alt="아이디" />
+          <img src={personImg} alt="아이디" />
           <input
             type="text"
             name="username"
@@ -32,9 +37,9 @@ function SignUp() {
         </div>
 
         <div className="input-line">
-          <img src="/assets/lock.png" alt="비밀번호" />
+          <img src={lockImg} alt="비밀번호" />
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="비밀번호"
             value={form.password}
@@ -42,9 +47,7 @@ function SignUp() {
             required
           />
           <img
-            src={
-              showPassword ? '/assets/eye-off.png' : '/assets/eye-on.png'
-            }
+            src={showPassword ? eyeoffImg : eyeonImg}
             alt="비밀번호 보기"
             className="eye-toggle"
             onClick={() => setShowPassword(!showPassword)}
@@ -52,7 +55,7 @@ function SignUp() {
         </div>
 
         <div className="input-line">
-          <img src="/assets/email.png" alt="이메일" />
+          <img src={mailImg} alt="이메일" />
           <input
             type="email"
             name="email"
@@ -68,7 +71,7 @@ function SignUp() {
         회원가입
       </button>
     </form>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;
