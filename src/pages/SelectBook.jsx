@@ -2,29 +2,27 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/selectbook.module.css";
 import Nav from "../components/Nav";
 
-// import img1 from "assets/images/newpage.png";
-// import img2 from "/assets/images/selectbook1.png";
-// import img3 from "/assets/images/selectbook2.png";
-// import img4 from "/assets/images/selectbook3.png";
-// import img5 from "/assets/images/selectbook4.png";
-// import img6 from "/assets/images/selectbook5.png";
-// import img7 from "/assets/images/selectbook6.png";
-
 const SelectBook = () => {
+  const [books, setBooks] = useState([]);
   const [centerIndex, setCenterIndex] = useState(0);
-  const [canScroll, setCanScroll] = useState(true); // ⬅️ 스크롤/키 입력 딜레이
+  const [canScroll, setCanScroll] = useState(true);
 
-  const books = [
-    { id: 1, title: "Book 1", image: "assets/images/newpage.png" },
-    { id: 2, title: "Book 2", image: "assets/images/selectbook1.png" },
-    { id: 3, title: "Book 3", image: "assets/images/selectbook2.png" },
-    { id: 4, title: "Book 4", image: "assets/images/selectbook3.png" },
-    { id: 5, title: "Book 5", image: "assets/images/selectbook4.png" },
-    { id: 6, title: "Book 6", image: "assets/images/selectbook5.png" },
-    { id: 7, title: "Book 7", image: "assets/images/selectbook6.png" },
-  ];
+  useEffect(() => {
+    fetch("/data/selectmypagebookData.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const newPageBook = {
+          title: "뉴페이지",
+          cover: "/assets/images/newpage.png",
+        };
+        const updatedBooks = [newPageBook, ...data];
+        setBooks(updatedBooks);
+        setCenterIndex(0);
+      })
+      .catch((err) => console.error("데이터 로딩 실패", err));
+  }, []);
 
-  const isNewPageCenter = books[centerIndex].title === "Book 1";
+  const isNewPageCenter = books[centerIndex]?.title?.trim() === "뉴페이지";
 
   const getOffset = (index) => {
     let offset = index - centerIndex;
@@ -35,10 +33,10 @@ const SelectBook = () => {
   };
 
   useEffect(() => {
-    const scrollDelay = 300; // 밀리초 (0.3초) 딜레이
+    const scrollDelay = 300;
 
     const handleMove = (direction) => {
-      if (!canScroll) return;
+      if (!canScroll || books.length === 0) return;
       setCanScroll(false);
       setCenterIndex((prev) =>
         direction === "left"
@@ -65,7 +63,7 @@ const SelectBook = () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("wheel", handleWheel);
     };
-  }, [canScroll, books.length]);
+  }, [canScroll, books]);
 
   return (
     <div className={styles.pageContainer}>
@@ -92,16 +90,15 @@ const SelectBook = () => {
 
           return (
             <div
-              key={book.id}
+              key={index}
               className={styles.book}
               style={{
                 transform: `translateX(${offset * baseX}px) translateY(${translateY}px) scale(${scale})`,
                 zIndex,
                 opacity,
-                transition: "transform 0.5s ease, opacity 0.5s ease",
               }}
             >
-              <img src={book.image} alt={book.title} />
+              <img src={book.cover} alt={book.title} />
             </div>
           );
         })}
@@ -110,10 +107,7 @@ const SelectBook = () => {
           {isNewPageCenter ? (
             <div className={styles.plusIconCenter}>＋</div>
           ) : (
-            <>
-              <div className={styles.editIconCenter}>✎</div>
-              <div className={styles.plusIconBottomRight}>＋</div>
-            </>
+            <div className={styles.editIconCenter}>✎</div>
           )}
         </div>
       </div>
