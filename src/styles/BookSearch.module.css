@@ -1,21 +1,21 @@
-.booksearchContainer {
+.booksearch-container {
   min-height: 100vh;
   background-color: white;
   position: relative;
-  padding-top: 400px;
+  padding-top: 400px; 
 }
 
-.booksearchTopImage2 {
+.booksearch-top-image2 {
   position: absolute;
   top: 53px;
   left: 48%;
   width: 950px;
   height: 350px;
-  z-index: 9;
-  opacity: 0.2;
+  z-index: 9; /* 아래쪽으로 겹치게 */
+  opacity: 0.2; /* 살짝 투명하게 겹쳐보이도록 */
 }
 
-.booksearchTopImage {
+.booksearch-top-image {
   position: absolute;
   top: 53px;
   left: 65%;
@@ -25,8 +25,8 @@
   z-index: 10;
 }
 
-.bookGrid,
-.resultsGrid {
+.book-grid,
+.results-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 3rem 2rem;
@@ -37,13 +37,12 @@
   place-items: center;
 }
 
-.bookCard {
+.book-card {
   margin: 0.5rem;
 }
-
-.bookCardImage {
-  width: 80px;
-  height: 120px;
+.book-card-image {
+  width: 80px;    
+  height: 120px;    
   object-fit: cover;
   border-radius: 4px;
 }
@@ -52,20 +51,21 @@
   filter: blur(4px) brightness(0.5);
 }
 
-.dimOverlay {
+.dim-overlay {
   position: absolute;
-  top: 600px;
+  top: 450px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 600px);
+  height: calc(300vh - 400px);
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 5;
 }
 
-.booksearchInputContainer,
-.searchInputContainer {
+
+.booksearch-input-container,
+.search-input-container {
   position: absolute;
-  top: 500px;
+  top: 500px; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -74,12 +74,13 @@
   justify-content: center;
 }
 
-.searchInputWrapper {
+
+.search-input-wrapper {
   position: relative;
   width: 24rem;
 }
 
-.searchIcon {
+.search-icon {
   position: absolute;
   top: 50%;
   left: 0.75rem;
@@ -90,11 +91,11 @@
   z-index: 10;
 }
 
-.booksearchInput,
-.searchInput {
+.booksearch-input,
+.search-input {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.5rem;
-  border-radius: 5px;
+  border-radius: 5px; 
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 1 4px 10px rgba(52, 52, 52, 0.1);
@@ -104,7 +105,7 @@
   text-align: center;
 }
 
-.searchResults {
+.search-results {
   position: absolute;
   inset: 0;
   background-color: white;
@@ -112,8 +113,9 @@
   padding-top: 600px;
 }
 
-.noResultsText {
+.no-results-text {
   grid-column: span 5;
   text-align: center;
   color: #6b7280;
 }
+
