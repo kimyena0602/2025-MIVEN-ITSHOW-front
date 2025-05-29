@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MyPageHeader from "./components/MyPageHeader";
 import { CoverColorProvider } from "./contexts/CoverColorContext";
 import SelectBook from "./pages/SelectBook";
 import SignUp from "./pages/SignUp";
@@ -14,7 +13,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/selectbook" element={<SelectBook />} />
-          <Route path="/mypageheader" element={<MyPageHeader />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />

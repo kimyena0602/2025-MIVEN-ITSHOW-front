@@ -1,5 +1,58 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("/src/assets/fonts/Pretendard.ttf") format("truetype");
+}
+
 .allBookListCtn {
-  heigth: 1827px;
-  width: 2121px;
-  background-color: #0000;
+  font-family: "Pretendard";
+  height: auto;
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.grid {
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-between;
+  gap: 1px;
+  background-color: #ddd;
+  position: relative;
+}
+
+.bookItem {
+  width: 324px;
+  height: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding-top: 20px;
+}
+
+.allBookCover {
+  width: 150px;
+  height: 230px;
+}
+
+.bookTitle {
+  color: #000000;
+  font-size: 12px;
+  margin-top: 10px;
+  width: 150px;
+  text-align: left;
+}
+
+.lastLine {
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+}
+
+.emptyCtn {
+  width: 1300px;
+  height: 50px;
 }
