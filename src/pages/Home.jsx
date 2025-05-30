@@ -1,8 +1,11 @@
 import React from "react";
 import Nav from "../components/Nav";
-import styles from "../styles/Home.module.css";
-// import { images } from "/public/assets/Book_img6.png";
+import Navstyles from "../styles/Nav.module.css";
+import { useCoverColor } from "../contexts/CoverColorContext";
+import Homestyles from "../styles/Home.module.css";
 import SearchBar from "../components/SearchBar";
+
+
 
 function Home() {
   //   const img_list = Object.entries(images);
