@@ -62,8 +62,6 @@ const BackButton = ({ label = "돌아가기" }) => {
             fontStyle: "normal",
             fontWeight: 100,
             lineHeight: "normal",
-
-            // background: "none"
           }}
         >
           {label}

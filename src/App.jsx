@@ -1,8 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import './styles/fonts.css';
+import MyPageHeader from "./components/MyPageHeader";
 import { CoverColorProvider } from "./contexts/CoverColorContext";
 import SelectBook from "./pages/SelectBook";
 import SignUp from "./pages/SignUp";
 import MyPage from "./pages/MyPage";
+import BookDetailPage from "./pages/BookDetailPage";
 import "./global.css";
 import Home from "./pages/Home";
 import BookSearch from "./pages/BookSearch";
@@ -17,6 +20,7 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/booksearch" element={<BookSearch />} />
+          <Route path="/scroll" element={<BookDetailPage />} />
         </Routes>
       </Router>
     </CoverColorProvider>

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const BookCard = ({ image, title, author }) => {
   return (
     <div className="w-full max-w-[200px]">
