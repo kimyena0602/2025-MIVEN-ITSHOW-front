@@ -1,11 +1,13 @@
 import React from 'react';
+import React from "react";
+import styles from "../styles/BookSearch.module.css";
 
 const BookCard = ({ image, title, author }) => {
   return (
-    <div className="w-full max-w-[200px]">
-      <img src={image} alt={title} className="w-full h-auto rounded-lg shadow" />
-      <h3 className="text-center mt-2 font-semibold">{title}</h3>
-      <p className="text-center text-sm text-gray-500">{author}</p>
+    <div className={styles.bookCard}>
+      <img src={image} alt={title} className={styles.bookCardImage} />
+      <h4 className={styles.bookTitle}>{title}</h4>
+      <p className={styles.bookAuthor}>{author}</p>
     </div>
   );
 };

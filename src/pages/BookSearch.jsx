@@ -3,6 +3,7 @@ import BookCard from "../components/BookCard";
 import booksData from "../data/book.json";
 import styles from "../styles/BookSearch.module.css";
 
+
 const BookSearch = () => {
   const [query, setQuery] = useState("");
 
@@ -12,6 +13,7 @@ const BookSearch = () => {
   );
 
   return (
+    
     <div className={styles.booksearchContainer}>
       {/* 상단 이미지: 항상 표시 */}
       <img
@@ -44,7 +46,7 @@ const BookSearch = () => {
         </div>
       </div>
 
-      {/* 배경 흐림 + 딤처리 (검색어 없을 때) */}
+      {}
       {!hasQuery && (
         <>
           <div className={styles.bookGrid + " " + styles.blurred}>
@@ -57,7 +59,9 @@ const BookSearch = () => {
               />
             ))}
           </div>
-          <div className={styles.dimOverlay}></div>
+          <div className={styles.overlayCtn}>
+            <div className={styles.dimOverlay}></div>
+          </div>
         </>
       )}
 
