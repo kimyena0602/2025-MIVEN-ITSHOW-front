@@ -2,16 +2,16 @@ import React from "react";
 import styles from "../styles/Nav.module.css";
 import { useCoverColor } from "../contexts/CoverColorContext";
 
-export default function Nav() {
+export default function Nav({ showBackGradient = true }) {
   const { coverColor } = useCoverColor();
 
   return (
     <div>
       <div
         className={styles.Gradation}
-        style={{
+        style={showBackGradient ? {
           background: `linear-gradient(180deg, ${coverColor} 0%, #fff 100%)`,
-        }}
+        } : null}
       ></div>
       <div className={styles.Allnavcontainer}>
         <div className={styles.Logo}>
