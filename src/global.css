@@ -5,5 +5,9 @@ body {
 }
 
 .react-colorful {
-  width: 440px !important;
+  width: 510px !important;
+}
+
+.react-colorful__saturation {
+  border-bottom: none !important;
 }
