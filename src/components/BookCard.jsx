@@ -1,13 +1,21 @@
-import React from 'react';
 import React from "react";
-import styles from "../styles/BookSearch.module.css";
+import { useNavigate } from "react-router-dom";
+import styles from "../styles/BookCard.module.css";
 
-const BookCard = ({ image, title, author }) => {
+const BookCard = ({ id, image, title, author }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/book/${id}`);
+  };
+
   return (
-    <div className={styles.bookCard}>
-      <img src={image} alt={title} className={styles.bookCardImage} />
-      <h4 className={styles.bookTitle}>{title}</h4>
-      <p className={styles.bookAuthor}>{author}</p>
+    <div className={styles.card} onClick={handleClick}>
+      <img src={image} alt={title} className={styles.bookImage} />
+      <div className={styles.bookInfo}>
+        <h3 className={styles.bookTitle}>{title}</h3>
+        <p className={styles.bookAuthor}>{author}</p>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import ModalContent from "../components/BookDetail/ModalContent";
 import BoldText from "../components/BoldText";
 import styles from "../styles/BookDetailPage.module.css";
 import BlurredBackground from "../components/BookDetail/BlurredBackground";
+import { BookDetailRightPanel } from "../components/BookDetail/BookDetailRightPanel";
 
 const BookDetailPage = () => {
     const [bookData, setBookData] = useState(null);
@@ -26,7 +27,17 @@ const BookDetailPage = () => {
                 <BackButton />
                 <section className={styles["book-detail"]}>
                     <BoldText title={bookData.title} className={styles["heading-primary"]} />
-                    <ModalContent book={bookData} />
+                    <ModalContent book={bookData} >
+                        <BookDetailRightPanel
+                            summary={bookData.summary}
+                            rating={bookData.rating}
+                            review={bookData.review}
+                            info={bookData.info}
+                            writer={bookData.writer}
+                            reading={bookData.reading}
+                            reviewDetail={bookData.reviewDetail}
+                        />
+                    </ModalContent>
                 </section>
             </BlurredBackground>
             <section className={styles["book-detail-review"]}>

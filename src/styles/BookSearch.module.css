@@ -8,9 +8,9 @@
 .booksearchTopImage2 {
   position: absolute;
   top: 53px;
-  left: 48%;
-  width: 950px;
-  height: 350px;
+  left: 53.5%;
+  width: 850px;
+  height: 320px;
   z-index: 9;
   opacity: 0.7;
 }
@@ -18,10 +18,10 @@
 .booksearchTopImage {
   position: absolute;
   top: 53px;
-  left: 65%;
+  left: 69%;
   transform: translateX(-50%);
-  width: 900px;
-  height: 350px;
+  width: 850px;
+  height: 320px;
   z-index: 10;
 }
 
@@ -29,12 +29,11 @@
 .resultsGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem 0.3rem; /* 갭 줄임 */
+  gap: 0.5rem 0.3rem;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 21.5rem;
   box-sizing: border-box;
-  place-items: center;
+  /* place-items: center; */
 }
 
 .bookCard {
@@ -42,8 +41,9 @@
 }
 
 .bookCardImage {
-  width: 260px;   /* 작게 조정 */
-  height: 340px;
+  top:450px;
+  width: 65px;
+  height: 85px;
   object-fit: cover;
   border-radius: 4px;
   transition: transform 0.2s;
@@ -126,5 +126,21 @@
 .noResultsText {
   grid-column: span 5;
   text-align: center;
-  color: #6b7280;
+  color: #373b42;
+}
+
+.Allnavcontainer,
+.Navdetail,
+.Clicknav,
+.Navfirstline,
+.Navsecondline {
+  background-color: transparent;
+}
+
+.Nav_Clicknav {
+  color: #8d9ca4 !important;
+  font-family: Pretendard;
+  font-size: 21px;
+  font-weight: 200;
+  cursor: pointer;
 }
