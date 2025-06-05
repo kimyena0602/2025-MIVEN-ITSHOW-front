@@ -73,13 +73,13 @@ const SelectBook = () => {
           const offset = getOffset(index);
           const absOffset = Math.abs(offset);
 
-          let baseX = 230;
-          if (absOffset === 1) baseX += 25;
-          if (absOffset === 2 || absOffset === 3) baseX -= 1;
-          if (absOffset === 3 || absOffset === 4) baseX -= 16;
+          let baseX = 300;
+          if (absOffset === 1) baseX += 70;
+          if (absOffset === 2 || absOffset === 3) baseX += 50;
+          if (absOffset === 3 || absOffset === 4) baseX += -20;
 
-          const scaleMap = [1.2, 0.9, 0.75, 0.6];
-          const yMap = [-140, -60, 1, 70];
+          const scaleMap = [1.2, 1.05, 0.9, 0.8];
+          const yMap = [-120, -50, 40, 110];
 
           const scale = scaleMap[absOffset] || 0;
           let translateY = yMap[absOffset] || 120;
@@ -108,6 +108,11 @@ const SelectBook = () => {
             <div className={styles.plusIconCenter}>＋</div>
           ) : (
             <div className={styles.editIconCenter}>✎</div>
+          )}
+
+          {/* 오른쪽 아래 + 버튼 */}
+          {!isNewPageCenter && (
+            <div className={styles.plusIconBottomRight}>＋</div>
           )}
         </div>
       </div>
