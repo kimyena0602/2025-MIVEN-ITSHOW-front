@@ -9,6 +9,7 @@ import BookDetailPage from "./pages/BookDetailPage";
 import "./global.css";
 import Home from "./pages/Home";
 import BookSearch from "./pages/BookSearch";
+import BookInputPage from "./pages/BookInputPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/booksearch" element={<BookSearch />} />
+          <Route path="/book/:id" element={<BookInputPage />} />
           <Route path="/scroll" element={<BookDetailPage />} />
         </Routes>
       </Router>
