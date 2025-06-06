@@ -155,7 +155,6 @@ const BookInputPage = () => {
                         </button>
                     </div>
                 </div>
-
                 {}
                 <div className={styles["right-section"]}>
                     <div className={styles["quote-text"]}>
