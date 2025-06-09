@@ -30,11 +30,11 @@
 .container {
   display: flex;
   align-items: flex-start;
-  gap: 30px; /* 22px → 30px */
-  margin-top: 50px; /* 40px → 50px */
+  gap: 30px;
+  margin-top: 50px;
   position: relative;
   z-index: 10;
-  margin-bottom: 35px; /* 26px → 35px */
+  margin-bottom: 35px;
 }
 
 .imageWrapper {
@@ -42,8 +42,8 @@
 }
 
 .profileImage {
-  width: 240px; /* 200px → 240px */
-  height: 240px; /* 200px → 240px */
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   object-fit: cover;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
@@ -54,68 +54,68 @@
 .nameRow {
   display: flex;
   align-items: center;
-  margin-bottom: 5px; /* 3px → 5px */
-  gap: 8px; /* 5px → 8px */
+  margin-bottom: 5px;
+  gap: 8px;
 }
 
 .username {
   font-family: "Pretendard";
-  font-size: 38px; /* 32px → 38px */
+  font-size: 38px;
   font-weight: 700;
   color: white;
 }
 
 .usernameInput {
-  font-size: 38px; /* 32px → 38px */
+  font-size: 38px;
   font-weight: 700;
-  padding: 8px 12px; /* 6px 10px → 8px 12px */
-  border-radius: 6px; /* 5px → 6px */
+  padding: 8px 12px;
+  border-radius: 6px;
   border: 0.6px solid #fff;
   background: none;
   color: #fff;
   outline: none;
-  width: 300px; /* 250px → 300px */
+  width: 300px;
 }
 
 .coverColorBtn {
   background: rgba(255, 255, 255, 0.9);
   font-family: "PretendardL";
   border: none;
-  padding: 20px 30px; /* 16.5px 26px → 20px 30px */
-  border-radius: 6px; /* 5px → 6px */
+  padding: 20px 30px;
+  border-radius: 6px;
   color: #6f6f6f;
   z-index: 100;
-  font-size: 16px; /* 14px → 16px */
+  font-size: 16px;
   cursor: pointer;
 }
 
 .subtext {
   font-family: "PretendardL";
-  font-size: 16px; /* 14px → 16px */
+  font-size: 16px;
   color: #fff;
-  margin-left: 12px; /* 10px → 12px */
+  margin-left: 12px;
 }
 
 .lowerSection {
   display: flex;
-  gap: 15px; /* 10px → 15px */
-  margin-top: 20px; /* 16px → 20px */
+  gap: 15px;
+  margin-top: 20px;
   align-items: flex-start;
 }
 
 .quoteBox {
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
-  padding: 30px; /* 24px → 30px */
-  border-radius: 8px; /* 6px → 8px */
-  width: 800px; /* 700px → 800px */
-  min-height: 100px; /* 85px → 100px */
+  padding: 30px;
+  border-radius: 8px;
+  width: 800px;
+  min-height: 100px;
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   scroll-behavior: smooth;
-  gap: 12px; /* 10px → 12px */
+  gap: 12px;
 }
 
 .editingQuoteBox {
@@ -125,8 +125,8 @@
 
 .quoteTitle {
   font-family: "Pretendard";
-  margin-bottom: 10px; /* 8px → 10px */
-  font-size: 22px; /* 18px → 22px */
+  margin-bottom: 10px;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -137,32 +137,32 @@
 .quoteText {
   font-family: "PretendardL";
   line-height: 1.5;
-  font-size: 18px; /* 15px → 18px */
-  height: 55px; /* 45px → 55px */
+  font-size: 18px;
+  height: 55px;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
 
 .quoteTitleInput {
-  font-size: 22px; /* 18px → 22px */
+  font-size: 22px;
   font-weight: 600;
-  padding: 8px; /* 6px → 8px */
-  border-radius: 5px; /* 4px → 5px */
+  padding: 8px;
+  border-radius: 5px;
   border: 0.6px solid #6f6f6f;
   background: none;
-  width: 300px; /* 250px → 300px */
+  width: 300px;
   outline: none;
 }
 
 .quoteTextArea {
-  font-size: 18px; /* 15px → 18px */
+  font-size: 18px;
   color: #345678;
   font-family: "PretendardL";
-  padding: 8px; /* 6px → 8px */
-  border-radius: 5px; /* 4px → 5px */
+  padding: 8px;
+  border-radius: 5px;
   resize: none;
-  height: 140px; /* 123px → 140px */
-  min-height: 70px; /* 60px → 70px */
+  height: 140px;
+  min-height: 70px;
   outline: none;
   border: 0.6px solid #6f6f6f;
   background: none;
@@ -173,24 +173,24 @@
   background-color: #6f6f6f;
   color: white;
   border: none;
-  border-radius: 5px; /* 4px → 5px */
-  padding: 12px 36px; /* 10px 32px → 12px 36px */
-  font-size: 16px; /* 14px → 16px */
+  border-radius: 5px;
+  padding: 12px 36px;
+  font-size: 16px;
   font-family: "PretendardL";
   cursor: pointer;
-  margin-top: 10px; /* 8px → 10px */
+  margin-top: 10px;
 }
 
 .actionSection {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 6px → 8px */
-  min-width: 240px; /* 200px → 240px */
+  gap: 8px;
+  min-width: 240px;
 }
 
 .buttons {
   display: flex;
-  gap: 8px; /* 6px → 8px */
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -199,61 +199,129 @@
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
   font-family: "PretendardL";
   border: none;
-  padding: 25px 90px 25px 25px; /* 20.5px 77px 20.5px 20px → 25px 90px 25px 25px */
-  border-radius: 6px; /* 5px → 6px */
+  padding: 25px 90px 25px 25px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 75px; /* 65px → 75px */
+  gap: 75px;
   cursor: pointer;
-  font-size: 16px; /* 14px → 16px */
+  font-size: 16px;
 }
 
 .icon {
-  font-size: 22px; /* 18px → 22px */
+  font-size: 22px;
 }
 
+/* 음악 플레이어 */
 .music {
+  max-width: 245px;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
-  padding: 31.5px 25px; /* 23.5px 20px → 28px 25px */
-  border-radius: 6px; /* 5px → 6px */
+  padding: 7px 20px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 15px; /* 12px → 15px */
+  gap: 15px;
   position: relative;
   z-index: 10;
+  transition: all 0.3s ease;
+  min-height: 70px;
+  backdrop-filter: blur(10px);
+}
+
+.albumCoverImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.playButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.playButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
 .playIcon {
-  font-size: 20px; /* 16px → 20px */
+  font-size: 18px;
+  transition: transform 0.2s ease;
 }
 
-.songnameartist {
+.musicInfo {
+  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 12px; /* 9px → 12px */
-}
-
-.artist {
-  font-weight: 100;
-  font-size: 14px; /* 12px → 14px */
-  color: #a6a6a6;
-  font-family: "PretendardL";
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .songname {
-  font-weight: 500;
-  font-size: 16px; /* 기본값에서 명시적으로 16px 설정 */
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Pretendard";
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.songname.overflow {
+  animation: scrollText 4s linear infinite;
+}
+
+.artist {
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "PretendardL";
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.artist.overflow {
+  animation: scrollText 6s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(calc(-100% + 120px));
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .cameraIconWrapper {
   position: absolute;
-  bottom: 12px; /* 10px → 12px */
-  right: 12px; /* 10px → 12px */
+  bottom: 12px;
+  right: 12px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
-  padding: 12px; /* 9px → 12px */
+  padding: 12px;
   cursor: pointer;
   z-index: 15;
   display: flex;
@@ -261,34 +329,35 @@
 }
 
 .cameraIcon {
-  width: 24px; /* 20px → 24px */
-  height: 24px; /* 20px → 24px */
+  width: 24px;
+  height: 24px;
   color: #555;
 }
 
 .colorPicker {
   position: absolute;
   top: 0px;
-  left: 730px; /* 610px → 700px */
+  left: 730px;
   background: white;
-  padding: 20px; /* 16px → 20px */
-  border-radius: 6px; /* 4px → 6px */
+  padding: 20px;
+  border-radius: 6px;
   display: grid;
-  gap: 10px; /* 8px → 10px */
+  gap: 10px;
   z-index: 999;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .colorBox {
-  width: 120px; /* 106px → 120px */
-  height: 70px; /* 62px → 70px */
-  border-radius: 5px; /* 4px → 5px */
+  width: 120px;
+  height: 70px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .moreColors {
   grid-column: span 4;
   text-align: right;
-  font-size: 18px; /* 16px → 18px */
+  font-size: 18px;
   display: flex;
   align-items: center;
   color: #6f6f6f;
@@ -296,13 +365,13 @@
   font-family: "PretendardL";
   justify-content: flex-end;
   cursor: pointer;
-  margin-top: 10px; /* 8px → 10px */
-  gap: 10px; /* 8px → 10px */
+  margin-top: 10px;
+  gap: 10px;
 }
 
 .gradientDot {
-  width: 20px; /* 16px → 20px */
-  height: 20px; /* 16px → 20px */
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: conic-gradient(
     from 98deg at 50% 50%,
@@ -319,15 +388,8 @@
   grid-column: span 4;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* 10px → 12px */
-  margin-top: 15px; /* 12px → 15px */
-}
-
-.colorInput {
-  width: 70px; /* 60px → 70px */
-  height: 36px; /* 32px → 36px */
-  border: none;
-  cursor: pointer;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .applyBtn {
@@ -335,8 +397,200 @@
   color: white;
   border: none;
   font-family: "PretendardL";
-  padding: 9px 15px; /* 6px 12px → 8px 15px */
-  border-radius: 5px; /* 4px → 5px */
-  font-size: 16px; /* 13px → 15px */
+  padding: 9px 15px;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
+}
+
+/* 음악 검색 모달 */
+.musicSearchModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.musicSearchContainer {
+  background: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.searchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.musicList {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.musicItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.musicItem:hover {
+  background: #f8f9fa;
+}
+
+.searchHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Pretendard";
+  color: #333;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+  padding: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.searchInputContainer {
+  position: relative;
+  padding: 20px 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.musicSearchInput {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: "PretendardL";
+  outline: none;
+  background: #f8f9fa;
+  box-sizing: border-box;
+}
+
+.musicSearchInput:focus {
+  border-color: #6f6f6f;
+  background: white;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.albumCover {
+  width: 50px;
+  height: 50px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 15px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.musicInfoModal {
+  flex: 1;
+  min-width: 0;
+}
+
+.songTitle {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Pretendard";
+  color: #333;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.artistName {
+  font-size: 13px;
+  font-family: "PretendardL";
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playBtn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #6f6f6f;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.playBtn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* 로딩 및 에러 메시지 스타일 */
+.loading {
+  text-align: center;
+  padding: 20px 20px;
+  color: #666;
+  font-family: "PretendardL";
+  font-size: 16px;
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 40px 20px;
+  color: #ff6666;
+  font-family: "PretendardL";
+  font-size: 16px;
 }
