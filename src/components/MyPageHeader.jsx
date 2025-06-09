@@ -10,7 +10,6 @@ import "../global.css";
 
 export default function MyPageHeader() {
   const [data, setData] = useState(mypageHeaderData);
-
   const [isEditing, setIsEditing] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [editedUsername, setEditedUsername] = useState(
@@ -30,13 +29,12 @@ export default function MyPageHeader() {
 
   // 음악 관련 state
   const [musicData, setMusicData] = useState({
-    song: "Island In The Sun",
-    artist: "Weezer",
+    song: "1000",
+    artist: "NCT WISH",
     album: "Weezer (Green Album)",
     image: "https://i.scdn.co/image/ab67616d0000b273bf5eb4fb32418903b46a0ae3",
     preview: null,
   });
-
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMusicSearch, setShowMusicSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -53,7 +51,7 @@ export default function MyPageHeader() {
   // 텍스트 오버플로우 체크 및 애니메이션 적용
   useEffect(() => {
     const checkTextOverflow = (element, text) => {
-      if (element && element.current) {
+      if (element?.current) {
         const elementWidth = element.current.offsetWidth;
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
@@ -75,27 +73,27 @@ export default function MyPageHeader() {
     checkTextOverflow(artistRef, musicData.artist);
   }, [musicData.song, musicData.artist]);
 
-  // 컴포넌트 마운트 시 초기 음악 검색
+  // 초기 음악 검색
   useEffect(() => {
     const searchInitialMusic = async () => {
       try {
-        const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(
-          "1000 NCT WISH"
-        )}`;
-        const options = {
-          method: "GET",
-          headers: {
-            "x-rapidapi-key":
-              "7138ae1e3cmsh63d4fa598445c5dp183b4ajsn1c9c5bdd5a48",
-            "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-          },
-        };
-
-        const response = await fetch(url, options);
+        const response = await fetch(
+          `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(
+            "1000 NCT WISH"
+          )}`,
+          {
+            method: "GET",
+            headers: {
+              "x-rapidapi-key":
+                "7138ae1e3cmsh63d4fa598445c5dp183b4ajsn1c9c5bdd5a48",
+              "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+            },
+          }
+        );
         const result = await response.json();
 
-        if (result.data && result.data.length > 0) {
-          const foundMusic = result.data[0]; // 첫 번째 결과 사용
+        if (result.data?.[0]) {
+          const foundMusic = result.data[0];
           setMusicData({
             song: foundMusic.title,
             artist: foundMusic.artist.name,
@@ -106,14 +104,13 @@ export default function MyPageHeader() {
         }
       } catch (err) {
         console.error("초기 음악 로딩 오류:", err);
-        // 오류 시 기본값 유지
       }
     };
 
     searchInitialMusic();
   }, []);
 
-  // Deezer API 검색 함수
+  // Deezer API 검색
   const searchMusic = async (query) => {
     if (!query.trim()) {
       setSearchResults([]);
@@ -124,28 +121,22 @@ export default function MyPageHeader() {
     setError(null);
 
     try {
-      const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(
-        query
-      )}`;
-      const options = {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":
-            "7138ae1e3cmsh63d4fa598445c5dp183b4ajsn1c9c5bdd5a48",
-          "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-        },
-      };
-
-      const response = await fetch(url, options);
+      const response = await fetch(
+        `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(
+          query
+        )}`,
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-key":
+              "7138ae1e3cmsh63d4fa598445c5dp183b4ajsn1c9c5bdd5a48",
+            "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+          },
+        }
+      );
       const result = await response.json();
-
-      if (result.data) {
-        setSearchResults(result.data.slice(0, 20)); // 최대 20개 결과
-      } else {
-        setSearchResults([]);
-      }
+      setSearchResults(result.data?.slice(0, 20) || []);
     } catch (err) {
-      console.error("음악 검색 오류:", err);
       setError("음악 검색 중 오류가 발생했습니다.");
       setSearchResults([]);
     } finally {
@@ -153,89 +144,73 @@ export default function MyPageHeader() {
     }
   };
 
-  // 검색어 변경 시 디바운스 적용
+  // 검색어 디바운스
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (searchQuery && showMusicSearch) {
         searchMusic(searchQuery);
       }
     }, 500);
-
     return () => clearTimeout(timeoutId);
   }, [searchQuery, showMusicSearch]);
 
-  // 모달에서 미리듣기 재생/정지
+  // 모달 미리듣기
   const togglePreviewMusic = (musicIndex, previewUrl) => {
     if (!previewUrl) {
       alert("이 곡은 미리듣기가 제공되지 않습니다.");
       return;
     }
 
-    // 메인 플레이어가 재생 중이면 정지
+    // 메인 플레이어 정지
     if (isPlaying) {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
+      audioRef.current?.pause();
       setIsPlaying(false);
     }
 
-    // 다른 곡이 재생 중이면 정지
+    // 다른 미리듣기 정지
     if (previewPlayingIndex !== null && previewPlayingIndex !== musicIndex) {
-      if (previewAudioRef.current) {
-        previewAudioRef.current.pause();
-        previewAudioRef.current.currentTime = 0;
-      }
+      previewAudioRef.current?.pause();
     }
 
-    // 현재 곡 재생/정지 토글
+    // 현재 곡 토글
     if (previewPlayingIndex === musicIndex) {
       previewAudioRef.current?.pause();
       setPreviewPlayingIndex(null);
     } else {
       if (previewAudioRef.current) {
         previewAudioRef.current.src = previewUrl;
-        previewAudioRef.current.play().catch((err) => {
-          console.error("미리듣기 재생 오류:", err);
-          alert("미리듣기 재생 중 오류가 발생했습니다.");
-        });
+        previewAudioRef.current
+          .play()
+          .catch(() => alert("미리듣기 재생 중 오류가 발생했습니다."));
         setPreviewPlayingIndex(musicIndex);
       }
     }
   };
 
-  // 음악 선택 함수
+  // 음악 선택
   const selectMusic = (selectedMusic) => {
-    const newMusicData = {
+    setMusicData({
       song: selectedMusic.title,
       artist: selectedMusic.artist.name,
       album: selectedMusic.album.title,
       image: selectedMusic.album.cover_medium || selectedMusic.album.cover,
       preview: selectedMusic.preview,
-    };
-
-    setMusicData(newMusicData);
+    });
     setShowMusicSearch(false);
     setSearchQuery("");
 
     // 미리듣기 정지
-    if (previewAudioRef.current) {
-      previewAudioRef.current.pause();
-      previewAudioRef.current.currentTime = 0;
-    }
+    previewAudioRef.current?.pause();
     setPreviewPlayingIndex(null);
 
-    // 현재 재생 중이면 새 음악으로 교체
+    // 메인 플레이어 정지
     if (isPlaying) {
+      audioRef.current?.pause();
       setIsPlaying(false);
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
     }
   };
 
-  // 음악 재생/일시정지 토글
+  // 메인 플레이어 토글
   const togglePlayMusic = () => {
     if (!musicData.preview) {
       alert("이 곡은 미리듣기가 제공되지 않습니다.");
@@ -246,55 +221,29 @@ export default function MyPageHeader() {
       audioRef.current?.pause();
       setIsPlaying(false);
     } else {
-      if (audioRef.current) {
-        audioRef.current.play().catch((err) => {
-          console.error("재생 오류:", err);
-          alert("음악 재생 중 오류가 발생했습니다.");
-        });
-        setIsPlaying(true);
-      }
+      audioRef.current
+        ?.play()
+        .catch(() => alert("음악 재생 중 오류가 발생했습니다."));
+      setIsPlaying(true);
     }
   };
 
-  // 오디오 이벤트 핸들러
+  // 오디오 이벤트
   useEffect(() => {
-    if (audioRef.current) {
-      const audio = audioRef.current;
-
+    const audio = audioRef.current;
+    if (audio) {
       const handleEnded = () => setIsPlaying(false);
-      const handleError = () => {
-        setIsPlaying(false);
-        alert("음악 재생 중 오류가 발생했습니다.");
-      };
-
       audio.addEventListener("ended", handleEnded);
-      audio.addEventListener("error", handleError);
-
-      return () => {
-        audio.removeEventListener("ended", handleEnded);
-        audio.removeEventListener("error", handleError);
-      };
+      return () => audio.removeEventListener("ended", handleEnded);
     }
   }, [musicData.preview]);
 
-  // 미리듣기 오디오 이벤트 핸들러
   useEffect(() => {
-    if (previewAudioRef.current) {
-      const audio = previewAudioRef.current;
-
+    const audio = previewAudioRef.current;
+    if (audio) {
       const handleEnded = () => setPreviewPlayingIndex(null);
-      const handleError = () => {
-        setPreviewPlayingIndex(null);
-        alert("미리듣기 재생 중 오류가 발생했습니다.");
-      };
-
       audio.addEventListener("ended", handleEnded);
-      audio.addEventListener("error", handleError);
-
-      return () => {
-        audio.removeEventListener("ended", handleEnded);
-        audio.removeEventListener("error", handleError);
-      };
+      return () => audio.removeEventListener("ended", handleEnded);
     }
   }, []);
 
@@ -306,28 +255,29 @@ export default function MyPageHeader() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
-    }
+    if (file) setSelectedImage(URL.createObjectURL(file));
   };
 
-  // 프로필 저장 함수 - 실제 데이터 업데이트
   const handleSave = () => {
-    // 편집된 내용을 실제 data에 반영
     setData((prevData) => ({
       ...prevData,
-      user: {
-        ...prevData.user,
-        username: editedUsername,
-      },
+      user: { ...prevData.user, username: editedUsername },
       quote: {
         ...prevData.quote,
         title: editedQuoteTitle,
         text: editedQuoteText,
       },
     }));
-
     setIsEditing(false);
+  };
+
+  const closeModal = () => {
+    setShowMusicSearch(false);
+    setSearchQuery("");
+    setSearchResults([]);
+    setError(null);
+    previewAudioRef.current?.pause();
+    setPreviewPlayingIndex(null);
   };
 
   return (
@@ -547,21 +497,7 @@ export default function MyPageHeader() {
           <div className={styles.musicSearchContainer}>
             <div className={styles.searchHeader}>
               <h3>곡을 검색해주세요</h3>
-              <button
-                className={styles.closeBtn}
-                onClick={() => {
-                  setShowMusicSearch(false);
-                  setSearchQuery("");
-                  setSearchResults([]);
-                  setError(null);
-                  // 미리듣기 정지
-                  if (previewAudioRef.current) {
-                    previewAudioRef.current.pause();
-                    previewAudioRef.current.currentTime = 0;
-                  }
-                  setPreviewPlayingIndex(null);
-                }}
-              >
+              <button className={styles.closeBtn} onClick={closeModal}>
                 ✕
               </button>
             </div>
@@ -579,16 +515,13 @@ export default function MyPageHeader() {
 
             <div className={styles.musicList}>
               {isLoading && <div className={styles.loading}>검색 중...</div>}
-
               {error && <div className={styles.errorMessage}>{error}</div>}
-
               {!isLoading &&
                 !error &&
                 searchResults.length === 0 &&
                 searchQuery && (
                   <div className={styles.loading}>검색 결과가 없습니다.</div>
                 )}
-
               {!isLoading && !error && searchQuery === "" && (
                 <div className={styles.loading}>검색어를 입력해주세요.</div>
               )}
@@ -635,20 +568,14 @@ export default function MyPageHeader() {
         </div>
       )}
 
-      {/* 숨겨진 오디오 엘리먼트 */}
+      {/* 오디오 엘리먼트 */}
       {musicData.preview && (
         <audio
           ref={audioRef}
           src={musicData.preview}
           onEnded={() => setIsPlaying(false)}
-          onError={() => {
-            setIsPlaying(false);
-            alert("음악 재생 중 오류가 발생했습니다.");
-          }}
         />
       )}
-
-      {/* 미리듣기용 오디오 엘리먼트 */}
       <audio ref={previewAudioRef} />
     </div>
   );
