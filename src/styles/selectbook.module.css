@@ -1,19 +1,17 @@
 .pageContainer {
-  /* 전체 페이지 스타일 (원하는 경우 배경 설정 가능) */
-  /* width: 100%;
+  width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, #2a84c2, #ffffff);
   overflow: hidden;
-  position: relative; */
+  position: relative;
 }
 
 .bookContainer {
   position: relative;
-  top: 100px;
+  top: 160px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 700px;
 }
 
 .book {
@@ -22,8 +20,8 @@
 }
 
 .book img {
-  width: 200px;
-  height: 280px;
+  width: 300px;
+  height: 480px;
 }
 
 /* 아이콘 전체를 감싸는 영역 */
@@ -33,13 +31,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* 내부 아이콘 외에는 클릭 방지 */
+  pointer-events: none;
 }
 
 /* 중앙 상단 플러스 아이콘 */
 .plusIconCenter {
   position: absolute;
-  top: -130px;
+  top: -180px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 30px;
@@ -58,7 +56,7 @@
 /* 중앙 상단 수정 아이콘 */
 .editIconCenter {
   position: absolute;
-  top: -130px;
+  top: -180px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 30px;
