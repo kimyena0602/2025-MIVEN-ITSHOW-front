@@ -5,6 +5,12 @@ import Nav from "../components/Nav";
 
 const BookSearch = () => {
   const [query, setQuery] = useState("");
+  const hasQuery = query.trim() !== "";
+  
+  const filteredBooks = booksData.filter((book) =>
+    book.title.toLowerCase().includes(query.toLowerCase()) ||
+    book.author.toLowerCase().includes(query.toLowerCase())
+  );
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -168,7 +174,12 @@ const BookSearch = () => {
             />
           </div>
         </div>
-        
+       
+        {/* 검색어가 없을 때: 모든 책 + 오버레이 */}
+        {!hasQuery && (
+          <>
+            <div className={styles.bookGrid}>
+              {booksData.map((book, idx) => (
         {/* 로딩 상태 */}
         {loading && (
           <div style={{ 
@@ -213,6 +224,14 @@ const BookSearch = () => {
           </>
         )}
         
+        {/* 검색어가 있을 때: 필터된 결과 */}
+        {hasQuery && (
+          <div className={styles.resultsGrid}>
+            {filteredBooks.length > 0 ? (
+              filteredBooks.map((book, idx) => (
+                <BookCard
+                  id={book.id}
+                  key={idx}
         {/* 검색어가 있을 때: 검색 결과 */}
         {hasQuery && !loading && (
           <div className={styles.resultsGrid}>
