@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import booksData from "../data/book.json";
 import styles from "../styles/BookInputPage.module.css";
-import BackButto from "../components/BackButton"
+import BackButton from "../components/BackButton";
 
 const BookInputPage = () => {
     const { id } = useParams();
@@ -49,8 +49,9 @@ const BookInputPage = () => {
     if (!book) return <div>책 정보를 불러오는 중입니다...</div>;
 
     return (
+        
         <div className={styles.container}>
-            <BackButto/>
+            <BackButton/>
             <div className={styles["page-title"]}>
                 {book.title}
             </div>
@@ -65,9 +66,6 @@ const BookInputPage = () => {
                             alt={book.title}
                             className={styles["book-cover"]}
                         />
-                        {/* <div className={styles["book-title"]}>{book.title}</div>
-                        <div className={styles["book-author"]}>인간들이</div>
-                        <div className={styles["book-author"]}>말할 때</div> */}
                     </div>
 
                     {}
