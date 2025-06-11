@@ -26,6 +26,8 @@ export default function MyPageHeader() {
   const [showCustomColorInput, setShowCustomColorInput] = useState(false);
   const [customColor, setCustomColor] = useState("#15719E");
   const [searchQuery, setSearchQuery] = useState("");
+  const [userName, setUserName] = useState("");
+  const [quoteCount, setQuoteCount] = useState(0);
 
   // 음악 관련 state
   const [musicData, setMusicData] = useState({
@@ -247,6 +249,38 @@ export default function MyPageHeader() {
     }
   }, []);
 
+  //
+  useEffect(() => {
+    const apiBaseUrl = "http://3.38.185.232:8080";
+
+    fetch(`${apiBaseUrl}/api/profile`, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY1NjMzMCwiZXhwIjoxNzQ5Njc0MzMwfQ.wJnL0vwAftOv2JnAG9lpA3EpKaY0IZ_NsUXPAQsUas0",
+      },
+    })
+      .then((response) => {
+        console.log("Response status:", response.status);
+        if (!response.ok) {
+          return response.text().then((text) => {
+            console.log("Error response body:", text);
+            throw new Error(`HTTP error! status: ${response.status}`);
+          });
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log("Success:", responseData);
+        setUserName(responseData.data.name || ""); // 이름 저장
+        setQuoteCount(responseData.data.quoteCount || 0); // 구절 수 저장
+      })
+
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   const handleColorSelect = (color) => {
     setSelectedColor(color);
     setCoverColor(color);
@@ -383,9 +417,9 @@ export default function MyPageHeader() {
               </>
             ) : (
               <>
-                <span className={styles.username}>{data.user.username}</span>
+                <span className={styles.username}>{userName}</span>
                 <span className={styles.subtext}>
-                  작성한 구절 {data.user.quoteCount}개
+                  작성한 구절 {quoteCount}개
                 </span>
               </>
             )}

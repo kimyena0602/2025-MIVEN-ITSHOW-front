@@ -8,18 +8,31 @@ const SelectBook = () => {
   const [canScroll, setCanScroll] = useState(true);
 
   useEffect(() => {
-    fetch("/data/selectmypagebookData.json")
+    const apiBaseUrl = "http://3.38.185.232:8080";
+
+    fetch(`${apiBaseUrl}/api/gallery/mylist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY1NjMzMCwiZXhwIjoxNzQ5Njc0MzMwfQ.wJnL0vwAftOv2JnAG9lpA3EpKaY0IZ_NsUXPAQsUas0",
+      },
+    })
       .then((res) => res.json())
-      .then((data) => {
+      .then((json) => {
         const newPageBook = {
           title: "뉴페이지",
           cover: "/assets/images/newpage.png",
         };
-        const updatedBooks = [newPageBook, ...data];
-        setBooks(updatedBooks);
+        const booksFromServer = json.data?.books || [];
+        const bookCovers = booksFromServer.map((book) => ({
+          title: book.title,
+          cover: book.cover,
+        }));
+        setBooks([newPageBook, ...bookCovers]);
         setCenterIndex(0);
       })
-      .catch((err) => console.error("데이터 로딩 실패", err));
+      .catch((err) => console.error("📕 책 커버 로딩 실패", err));
   }, []);
 
   const isNewPageCenter = books[centerIndex]?.title?.trim() === "뉴페이지";
@@ -93,7 +106,9 @@ const SelectBook = () => {
               key={index}
               className={styles.book}
               style={{
-                transform: `translateX(${offset * baseX}px) translateY(${translateY}px) scale(${scale})`,
+                transform: `translateX(${
+                  offset * baseX
+                }px) translateY(${translateY}px) scale(${scale})`,
                 zIndex,
                 opacity,
               }}
@@ -110,7 +125,6 @@ const SelectBook = () => {
             <div className={styles.editIconCenter}>✎</div>
           )}
 
-          {/* 오른쪽 아래 + 버튼 */}
           {!isNewPageCenter && (
             <div className={styles.plusIconBottomRight}>＋</div>
           )}
