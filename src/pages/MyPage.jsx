@@ -12,7 +12,7 @@ export default function MyPage() {
         height: "100vh", // 전체 화면 높이로 설정해야 스크롤 작동
       }}
     >
-      <style jsx>{`
+      <style>{`
         div::-webkit-scrollbar {
           display: none; /* Webkit 기반 브라우저 스크롤바 숨김 */
         }
