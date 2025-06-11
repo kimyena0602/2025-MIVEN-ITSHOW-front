@@ -6,7 +6,7 @@ export default function MyPageBody() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const apiBaseUrl = "3.38.185.232:8080:8080";
+    const apiBaseUrl = "http://3.38.185.232:8080";
 
     fetch(`${apiBaseUrl}/api/gallery/mylist`, {
       method: "POST",
