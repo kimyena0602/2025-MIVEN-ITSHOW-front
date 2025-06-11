@@ -3,19 +3,27 @@ import styles from "../styles/MyPageBody.module.css";
 import "../global.css";
 
 export default function MyPageBody() {
-  const [data, setData] = useState(null);
-  const [title, setTitle] = useState("");
-  const [cover, setCover] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("/data/selectmypagebookData.json")
+    const apiBaseUrl = "3.38.185.232:8080:8080";
+
+    fetch(`${apiBaseUrl}/api/gallery/mylist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY1NjMzMCwiZXhwIjoxNzQ5Njc0MzMwfQ.wJnL0vwAftOv2JnAG9lpA3EpKaY0IZ_NsUXPAQsUas0",
+      },
+    })
       .then((res) => res.json())
       .then((json) => {
-        setData(json);
-        setTitle(json[0]?.title);
-        setCover(json[0]?.cover);
+        const books = json.data?.books || [];
+        setData(books);
       })
-      .catch((err) => console.log("데이터 불러오기 실패", err));
+      .catch((err) => {
+        console.error("❌ 데이터 불러오기 실패:", err);
+      });
   }, []);
 
   const emptyBook = () => {
@@ -37,7 +45,7 @@ export default function MyPageBody() {
     <div>
       <div className={styles.allBookListCtn}>
         <div className={styles.grid}>
-          {data?.map((book, index) => (
+          {data.map((book, index) => (
             <div key={index} className={styles.bookItem}>
               <img
                 className={styles.allBookCover}
@@ -47,7 +55,7 @@ export default function MyPageBody() {
               <div className={styles.bookTitle}>{book.title}</div>
             </div>
           ))}
-          {data && emptyBook()}
+          {emptyBook()}
           <div className={styles.lastLine} />
         </div>
       </div>
