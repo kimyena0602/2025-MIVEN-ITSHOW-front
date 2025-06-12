@@ -67,7 +67,7 @@ export default function MyPageHeader() {
   // API 설정
   const apiBaseUrl = "http://3.38.185.232:8080";
   const token =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY5MTIyNSwiZXhwIjoxNzQ5NzA5MjI1fQ.i4iT75y0ZzYmIqSlAVTjG0m5Y5aIZ-o5B2r6u-kcmDg";
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJheXVuQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY5Mzk1NSwiZXhwIjoxNzQ5NzExOTU1fQ.wljBQQUv38gXm5tKqLBi4feqBdl3au2OTkKqvhYTGY8";
 
   const uploadProfileImage = async (imageFile) => {
     try {
@@ -481,8 +481,6 @@ export default function MyPageHeader() {
 
       // 편집 모드 종료
       setIsEditing(false);
-
-      alert("프로필이 성공적으로 저장되었습니다!");
     } catch (error) {
       alert(`프로필 저장에 실패했습니다: ${error.message}`);
     }
@@ -514,9 +512,6 @@ export default function MyPageHeader() {
             // URL이 없어도 일단 미리보기는 유지
             console.warn(
               "서버에서 이미지 URL을 반환하지 않았지만 업로드는 성공한 것 같습니다."
-            );
-            alert(
-              "이미지 업로드는 완료되었지만 URL을 받지 못했습니다. 새로고침 후 확인해보세요."
             );
           }
         }
