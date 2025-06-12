@@ -9,17 +9,23 @@ import mypageHeaderData from "../data/mypageheaderData.json";
 import "../global.css";
 
 export default function MyPageHeader() {
-  const [data, setData] = useState(mypageHeaderData);
+  const [data, setData] = useState({
+    ...mypageHeaderData,
+    quote: {
+      title: "인상 깊은 책이나 구절을 입력해주세요",
+      text: "당신만의 특별한 문구를 여기에 남겨보세요",
+    },
+  });
   const [isEditing, setIsEditing] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [editedUsername, setEditedUsername] = useState(
     mypageHeaderData.user.username
   );
   const [editedQuoteTitle, setEditedQuoteTitle] = useState(
-    mypageHeaderData.quote.title
+    "인상 깊은 책이나 구절을 입력해주세요"
   );
   const [editedQuoteText, setEditedQuoteText] = useState(
-    mypageHeaderData.quote.text
+    "당신만의 특별한 문구를 여기에 남겨보세요"
   );
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState("#15719E");
@@ -28,19 +34,27 @@ export default function MyPageHeader() {
   const [searchQuery, setSearchQuery] = useState("");
   const [userName, setUserName] = useState("");
   const [quoteCount, setQuoteCount] = useState(0);
+  const [isImageLoading, setIsImageLoading] = useState(true); // 이미지 로딩 상태
+  const [isMusicDataLoading, setIsMusicDataLoading] = useState(true); // 음악 데이터 로딩 상태
+
+  // 백엔드 연결용 상태 추가
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   // 음악 관련 state
   const [musicData, setMusicData] = useState({
-    song: "1000",
-    artist: "NCT WISH",
-    album: "Weezer (Green Album)",
-    image: "https://i.scdn.co/image/ab67616d0000b273bf5eb4fb32418903b46a0ae3",
+    id: null,
+    song: "음악을 검색해보세요",
+    artist: "아티스트",
+    album: "",
+    image: null,
     preview: null,
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMusicSearch, setShowMusicSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isMusicLoading, setIsMusicLoading] = useState(false);
   const [error, setError] = useState(null);
   const [previewPlayingIndex, setPreviewPlayingIndex] = useState(null);
 
@@ -49,6 +63,88 @@ export default function MyPageHeader() {
   const songNameRef = useRef(null);
   const artistRef = useRef(null);
   const { setCoverColor } = useCoverColor();
+
+  // API 설정
+  const apiBaseUrl = "http://3.38.185.232:8080";
+  const token =
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY5MTIyNSwiZXhwIjoxNzQ5NzA5MjI1fQ.i4iT75y0ZzYmIqSlAVTjG0m5Y5aIZ-o5B2r6u-kcmDg";
+
+  const uploadProfileImage = async (imageFile) => {
+    try {
+      setIsUploadingImage(true);
+
+      const formData = new FormData();
+      formData.append("file", imageFile);
+
+      const response = await fetch(`${apiBaseUrl}/api/profile`, {
+        method: "POST",
+        headers: {
+          Authorization: token,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `HTTP error! status: ${response.status}, message: ${errorText}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("이미지 업로드 응답 전체:", result);
+      console.log("result.data:", result.data);
+      console.log("result.data?.url:", result.data?.url);
+
+      if (result.data) {
+        console.log("data 객체의 모든 키:", Object.keys(result.data));
+      }
+
+      const imageUrl = result.data?.url || result.url;
+      console.log("최종 이미지 URL:", imageUrl);
+
+      return imageUrl;
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+      throw error;
+    } finally {
+      setIsUploadingImage(false);
+    }
+  };
+
+  // 프로필 업데이트 함수
+  const updateProfile = async (profileData) => {
+    try {
+      setIsSaving(true);
+      setSaveError(null);
+
+      const response = await fetch(`${apiBaseUrl}/api/profile`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(profileData),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `HTTP error! status: ${response.status}, message: ${errorText}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("프로필 업데이트 성공:", result);
+      return result;
+    } catch (error) {
+      console.error("프로필 업데이트 실패:", error);
+      setSaveError(error.message);
+      throw error;
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   // 텍스트 오버플로우 체크 및 애니메이션 적용
   useEffect(() => {
@@ -75,43 +171,6 @@ export default function MyPageHeader() {
     checkTextOverflow(artistRef, musicData.artist);
   }, [musicData.song, musicData.artist]);
 
-  // 초기 음악 검색
-  useEffect(() => {
-    const searchInitialMusic = async () => {
-      try {
-        const response = await fetch(
-          `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(
-            "1000 NCT WISH"
-          )}`,
-          {
-            method: "GET",
-            headers: {
-              "x-rapidapi-key":
-                "7138ae1e3cmsh63d4fa598445c5dp183b4ajsn1c9c5bdd5a48",
-              "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-            },
-          }
-        );
-        const result = await response.json();
-
-        if (result.data?.[0]) {
-          const foundMusic = result.data[0];
-          setMusicData({
-            song: foundMusic.title,
-            artist: foundMusic.artist.name,
-            album: foundMusic.album.title,
-            image: foundMusic.album.cover_medium || foundMusic.album.cover,
-            preview: foundMusic.preview,
-          });
-        }
-      } catch (err) {
-        console.error("초기 음악 로딩 오류:", err);
-      }
-    };
-
-    searchInitialMusic();
-  }, []);
-
   // Deezer API 검색
   const searchMusic = async (query) => {
     if (!query.trim()) {
@@ -119,7 +178,7 @@ export default function MyPageHeader() {
       return;
     }
 
-    setIsLoading(true);
+    setIsMusicLoading(true);
     setError(null);
 
     try {
@@ -142,7 +201,7 @@ export default function MyPageHeader() {
       setError("음악 검색 중 오류가 발생했습니다.");
       setSearchResults([]);
     } finally {
-      setIsLoading(false);
+      setIsMusicLoading(false);
     }
   };
 
@@ -189,9 +248,10 @@ export default function MyPageHeader() {
     }
   };
 
-  // 음악 선택
+  // 음악 선택 (musicId 저장 추가)
   const selectMusic = (selectedMusic) => {
     setMusicData({
+      id: selectedMusic.id,
       song: selectedMusic.title,
       artist: selectedMusic.artist.name,
       album: selectedMusic.album.title,
@@ -249,37 +309,184 @@ export default function MyPageHeader() {
     }
   }, []);
 
-  //
+  // 프로필 정보 가져오기
   useEffect(() => {
-    const apiBaseUrl = "http://3.38.185.232:8080";
+    const loadProfile = async () => {
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/profile`, {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        });
 
-    fetch(`${apiBaseUrl}/api/profile`, {
-      method: "GET",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY1NjMzMCwiZXhwIjoxNzQ5Njc0MzMwfQ.wJnL0vwAftOv2JnAG9lpA3EpKaY0IZ_NsUXPAQsUas0",
-      },
-    })
-      .then((response) => {
-        console.log("Response status:", response.status);
         if (!response.ok) {
-          return response.text().then((text) => {
-            console.log("Error response body:", text);
-            throw new Error(`HTTP error! status: ${response.status}`);
-          });
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
-      })
-      .then((responseData) => {
-        console.log("Success:", responseData);
-        setUserName(responseData.data.name || ""); // 이름 저장
-        setQuoteCount(responseData.data.quoteCount || 0); // 구절 수 저장
-      })
 
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        const responseData = await response.json();
+        console.log("Success:", responseData);
+        const profileData = responseData.data;
+
+        // 기본 정보 즉시 설정 (텍스트 정보)
+        setUserName(profileData.name || "");
+        setQuoteCount(profileData.quoteCount || 0);
+
+        // 커버 색상 즉시 설정
+        if (profileData.coverColor) {
+          const colorWithHash = profileData.coverColor.startsWith("#")
+            ? profileData.coverColor
+            : `#${profileData.coverColor}`;
+          setSelectedColor(colorWithHash);
+          setCoverColor(colorWithHash);
+        }
+
+        // 인용구 정보 즉시 설정
+        if (profileData.quote) {
+          setData((prev) => ({
+            ...prev,
+            quote: {
+              title: profileData.quote.title,
+              text: profileData.quote.text,
+            },
+          }));
+          setEditedQuoteTitle(profileData.quote.title);
+          setEditedQuoteText(profileData.quote.text);
+        }
+
+        // 편집용 이름 즉시 업데이트
+        setEditedUsername(profileData.name || mypageHeaderData.user.username);
+
+        // 이미지 로딩 (별도 처리)
+        if (profileData.profileImg) {
+          const img = new Image();
+          img.onload = () => {
+            setSelectedImage(profileData.profileImg);
+            setIsImageLoading(false);
+          };
+          img.onerror = () => {
+            setIsImageLoading(false);
+          };
+          img.src = profileData.profileImg;
+        } else {
+          setIsImageLoading(false);
+        }
+
+        // 음악 정보 로딩 (별도 처리)
+        if (profileData.music) {
+          try {
+            const musicResponse = await fetch(
+              `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(
+                `${profileData.music.song} ${profileData.music.artist}`
+              )}`,
+              {
+                method: "GET",
+                headers: {
+                  "x-rapidapi-key":
+                    "7138ae1e3cmsh63d4fa598445c5dp183b4ajsn1c9c5bdd5a48",
+                  "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+                },
+              }
+            );
+            const musicResult = await musicResponse.json();
+
+            if (musicResult.data?.[0]) {
+              const foundMusic = musicResult.data[0];
+              setMusicData({
+                id: profileData.music.musicId || foundMusic.id,
+                song: profileData.music.song,
+                artist: profileData.music.artist,
+                album: foundMusic.album.title,
+                image: foundMusic.album.cover_medium || foundMusic.album.cover,
+                preview: foundMusic.preview,
+              });
+            } else {
+              setMusicData((prev) => ({
+                ...prev,
+                id: profileData.music.musicId,
+                song: profileData.music.song,
+                artist: profileData.music.artist,
+              }));
+            }
+          } catch (error) {
+            console.error("음악 재검색 오류:", error);
+            setMusicData((prev) => ({
+              ...prev,
+              id: profileData.music.musicId,
+              song: profileData.music.song,
+              artist: profileData.music.artist,
+            }));
+          } finally {
+            setIsMusicDataLoading(false);
+          }
+        } else {
+          setIsMusicDataLoading(false);
+        }
+      } catch (error) {
+        console.error("프로필 로딩 에러:", error);
+        setIsImageLoading(false);
+        setIsMusicDataLoading(false);
+      }
+    };
+
+    loadProfile();
   }, []);
+
+  // 편집 시작 함수
+  const startEditing = () => {
+    // 현재 저장된 값들로 편집 폼 초기화
+    setEditedUsername(userName);
+    setEditedQuoteTitle(data.quote.title);
+    setEditedQuoteText(data.quote.text);
+    setSaveError(null); // 에러 초기화
+    setIsEditing(true);
+  };
+
+  // 저장 함수 (백엔드 연결)
+  const handleSave = async () => {
+    try {
+      // 요청 데이터 구성
+      const profileData = {
+        name: editedUsername,
+        coverColor: selectedColor.replace("#", ""), // # 제거
+        music: {
+          musicId: musicData.id ? musicData.id.toString() : "unknown",
+          song: musicData.song,
+          artist: musicData.artist,
+        },
+        quote: {
+          title: editedQuoteTitle,
+          text: editedQuoteText,
+        },
+      };
+
+      console.log("전송할 데이터:", profileData);
+
+      // 백엔드에 업데이트 요청
+      await updateProfile(profileData);
+
+      // 성공시 로컬 상태 업데이트
+      setData((prevData) => ({
+        ...prevData,
+        user: { ...prevData.user, username: editedUsername },
+        quote: {
+          ...prevData.quote,
+          title: editedQuoteTitle,
+          text: editedQuoteText,
+        },
+      }));
+
+      // 실제 userName도 업데이트
+      setUserName(editedUsername);
+
+      // 편집 모드 종료
+      setIsEditing(false);
+
+      alert("프로필이 성공적으로 저장되었습니다!");
+    } catch (error) {
+      alert(`프로필 저장에 실패했습니다: ${error.message}`);
+    }
+  };
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -287,22 +494,39 @@ export default function MyPageHeader() {
     setIsColorPickerOpen(false);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) setSelectedImage(URL.createObjectURL(file));
-  };
+    if (file) {
+      try {
+        // 먼저 미리보기용으로 로컬 URL 설정
+        const localImageUrl = URL.createObjectURL(file);
+        setSelectedImage(localImageUrl);
 
-  const handleSave = () => {
-    setData((prevData) => ({
-      ...prevData,
-      user: { ...prevData.user, username: editedUsername },
-      quote: {
-        ...prevData.quote,
-        title: editedQuoteTitle,
-        text: editedQuoteText,
-      },
-    }));
-    setIsEditing(false);
+        // 편집 모드일 때만 서버에 업로드
+        if (isEditing) {
+          const uploadedImageUrl = await uploadProfileImage(file);
+          console.log("업로드 결과 URL:", uploadedImageUrl);
+
+          if (uploadedImageUrl) {
+            setSelectedImage(uploadedImageUrl);
+            alert("프로필 이미지가 업로드되었습니다!");
+          } else {
+            // URL이 없어도 일단 미리보기는 유지
+            console.warn(
+              "서버에서 이미지 URL을 반환하지 않았지만 업로드는 성공한 것 같습니다."
+            );
+            alert(
+              "이미지 업로드는 완료되었지만 URL을 받지 못했습니다. 새로고침 후 확인해보세요."
+            );
+          }
+        }
+      } catch (error) {
+        console.error("이미지 업로드 오류:", error);
+        alert(`이미지 업로드에 실패했습니다: ${error.message}`);
+        // 실패 시에도 미리보기는 유지 (로컬 URL)
+        console.log("미리보기는 유지됩니다.");
+      }
+    }
   };
 
   const closeModal = () => {
@@ -324,14 +548,23 @@ export default function MyPageHeader() {
           {isEditing && (
             <label htmlFor="imageUpload" className={styles.cameraIconWrapper}>
               <FiCamera className={styles.cameraIcon} />
+              {isUploadingImage && (
+                <div className={styles.uploadingIndicator}>업로드 중...</div>
+              )}
             </label>
           )}
           <label htmlFor="imageUpload">
-            <img
-              src={selectedImage || "assets/images/Mypagepicture.png"}
-              alt="프로필"
-              className={styles.profileImage}
-            />
+            {isImageLoading ? (
+              <div className={styles.imageLoadingContainer}>
+                <div className={styles.imageLoadingSpinner}></div>
+              </div>
+            ) : (
+              <img
+                src={selectedImage || "assets/images/Mypagepicture.png"}
+                alt="프로필"
+                className={styles.profileImage}
+              />
+            )}
           </label>
           {isEditing && (
             <input
@@ -340,6 +573,7 @@ export default function MyPageHeader() {
               accept="image/*"
               onChange={handleImageChange}
               style={{ display: "none" }}
+              disabled={isUploadingImage}
             />
           )}
         </div>
@@ -412,7 +646,7 @@ export default function MyPageHeader() {
                   </div>
                 )}
                 <span className={styles.subtext}>
-                  작성한 구절 {data.user.quoteCount}개
+                  작성한 구절 {quoteCount}개
                 </span>
               </>
             ) : (
@@ -445,8 +679,12 @@ export default function MyPageHeader() {
                     onChange={(e) => setEditedQuoteText(e.target.value)}
                     style={{ color: selectedColor }}
                   />
-                  <button className={styles.completeBtn} onClick={handleSave}>
-                    완료
+                  <button
+                    className={styles.completeBtn}
+                    onClick={handleSave}
+                    disabled={isSaving}
+                  >
+                    {isSaving ? "저장 중..." : "완료"}
                   </button>
                 </>
               ) : (
@@ -467,11 +705,16 @@ export default function MyPageHeader() {
               )}
             </div>
 
+            {/* 에러 메시지 표시 */}
+            {saveError && (
+              <div className={styles.errorMessage}>저장 실패: {saveError}</div>
+            )}
+
             <div className={styles.actionSection}>
               <div className={styles.buttons}>
                 <button
                   className={styles.btn}
-                  onClick={() => setIsEditing(!isEditing)}
+                  onClick={startEditing}
                   style={{ color: selectedColor }}
                 >
                   <FiSettings className={styles.icon} />
@@ -490,35 +733,46 @@ export default function MyPageHeader() {
                 }}
                 onClick={() => isEditing && setShowMusicSearch(true)}
               >
-                {musicData.image && (
-                  <img
-                    src={musicData.image}
-                    alt="앨범 커버"
-                    className={styles.albumCoverImage}
-                  />
+                {isMusicDataLoading ? (
+                  <div className={styles.musicLoadingContainer}>
+                    <div className={styles.musicLoadingSpinner}></div>
+                    <div className={styles.musicLoadingText}>
+                      음악 정보 불러오는 중...
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {musicData.image && (
+                      <img
+                        src={musicData.image}
+                        alt="앨범 커버"
+                        className={styles.albumCoverImage}
+                      />
+                    )}
+                    <button
+                      className={styles.playButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePlayMusic();
+                      }}
+                      style={{ color: selectedColor }}
+                    >
+                      {isPlaying ? (
+                        <FaPause className={styles.playIcon} />
+                      ) : (
+                        <FaPlay className={styles.playIcon} />
+                      )}
+                    </button>
+                    <div className={styles.musicInfo}>
+                      <p ref={songNameRef} className={styles.songname}>
+                        {musicData.song}
+                      </p>
+                      <span ref={artistRef} className={styles.artist}>
+                        {musicData.artist}
+                      </span>
+                    </div>
+                  </>
                 )}
-                <button
-                  className={styles.playButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    togglePlayMusic();
-                  }}
-                  style={{ color: selectedColor }}
-                >
-                  {isPlaying ? (
-                    <FaPause className={styles.playIcon} />
-                  ) : (
-                    <FaPlay className={styles.playIcon} />
-                  )}
-                </button>
-                <div className={styles.musicInfo}>
-                  <p ref={songNameRef} className={styles.songname}>
-                    {musicData.song}
-                  </p>
-                  <span ref={artistRef} className={styles.artist}>
-                    {musicData.artist}
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -548,15 +802,17 @@ export default function MyPageHeader() {
             </div>
 
             <div className={styles.musicList}>
-              {isLoading && <div className={styles.loading}>검색 중...</div>}
+              {isMusicLoading && (
+                <div className={styles.loading}>검색 중...</div>
+              )}
               {error && <div className={styles.errorMessage}>{error}</div>}
-              {!isLoading &&
+              {!isMusicLoading &&
                 !error &&
                 searchResults.length === 0 &&
                 searchQuery && (
                   <div className={styles.loading}>검색 결과가 없습니다.</div>
                 )}
-              {!isLoading && !error && searchQuery === "" && (
+              {!isMusicLoading && !error && searchQuery === "" && (
                 <div className={styles.loading}>검색어를 입력해주세요.</div>
               )}
 
