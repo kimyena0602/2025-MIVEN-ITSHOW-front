@@ -67,7 +67,7 @@ export default function MyPageHeader() {
   // API 설정
   const apiBaseUrl = "http://3.38.185.232:8080";
   const token =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJheXVuQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY5Mzk1NSwiZXhwIjoxNzQ5NzExOTU1fQ.wljBQQUv38gXm5tKqLBi4feqBdl3au2OTkKqvhYTGY8";
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTcyNDg0NSwiZXhwIjoxNzQ5NzQyODQ1fQ.pJ6yiFNE0FbXUOkC5idRAkr218q2yZpMszG2RrzTe8Y";
 
   const uploadProfileImage = async (imageFile) => {
     try {
