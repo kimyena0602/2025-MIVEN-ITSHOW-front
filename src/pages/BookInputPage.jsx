@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import booksData from "../data/book.json";
 import styles from "../styles/BookInputPage.module.css";
 import BackButton from "../components/BackButton";
@@ -8,14 +8,15 @@ const BookInputPage = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
     const [rating, setRating] = useState(0);
-    
+
     const [formData, setFormData] = useState({
         isbn: "",
         publishDate: "",
         publisher: "",
         readingPeriod: "",
         writer: "",
-        quote: ""
+        quote: "",
+        shortReview: "" // 추가된 필드
     });
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const BookInputPage = () => {
             rating: rating,
             ...formData
         };
-        
+
         console.log("저장할 데이터:", saveData);
         alert(`"${book.title}"에 대한 정보가 저장되었습니다!\n평점: ${rating}점`);
     };
@@ -49,28 +50,24 @@ const BookInputPage = () => {
     if (!book) return <div>책 정보를 불러오는 중입니다...</div>;
 
     return (
-        
         <div className={styles.container}>
-            <BackButton/>
+            <BackButton />
             <div className={styles["page-title"]}>
                 {book.title}
             </div>
-            
+
             <div className={styles["modal-content"]}>
                 <div className={styles["blur-background"]}></div>
                 <div className={styles["content-wrapper"]}>
-                    {}
                     <div className={styles["book-cover-section"]}>
-                        <img 
-                            src={book.image} 
+                        <img
+                            src={book.image}
                             alt={book.title}
                             className={styles["book-cover"]}
                         />
                     </div>
 
-                    {}
                     <div className={styles["info-panel"]}>
-                        {}
                         <div className={styles["section-title"]}>기본정보</div>
                         <div className={styles["section-block"]}>
                             <div className={styles["info-item"]}>
@@ -105,7 +102,6 @@ const BookInputPage = () => {
                             </div>
                         </div>
 
-                        {}
                         <div className={styles["section-title"]}>독서</div>
                         <div className={styles["section-block"]}>
                             <div className={styles["info-item"]}>
@@ -128,8 +124,8 @@ const BookInputPage = () => {
                                 />
                             </div>
                         </div>
-                        {}
-                        <div className={styles["section-title"]}>평점</div>
+
+                        <div className={styles["section-title"]}>리뷰</div>
                         <div className={styles["rating-section"]}>
                             <div className={styles["rating-title"]}>이책바의 평점</div>
                             <div className={styles["rating-stars"]}>
@@ -141,9 +137,14 @@ const BookInputPage = () => {
                                     />
                                 ))}
                                 <span className={styles["rating-value"]}>{rating}</span>
-                                <span className={styles["rating-link"]}>
-                                    평점등록하기
-                                </span>
+                                <input
+                                    type="text"
+                                    className={styles["info-input"]}
+                                    placeholder="한줄 소감을 작성해 주세요"
+                                    value={formData.shortReview}
+                                    onChange={(e) => handleInputChange('shortReview', e.target.value)}
+                                    style={{ marginLeft: "10px", width: "180px" }}
+                                />
                             </div>
                         </div>
 
@@ -152,14 +153,14 @@ const BookInputPage = () => {
                         </button>
                     </div>
                 </div>
-                {}
+
                 <div className={styles["right-section"]}>
-                    <div className={styles["quote-text"]}>
-                    </div>
+                    <div className={styles["quote-text"]}></div>
                     <div className={styles["quote-input-area"]}>
                         <textarea
                             className={styles["quote-input"]}
-                            placeholder="'간직하고 싶은 인상 깊은 구절을 적정해 보세요'"
+                            placeholder="'간직하고 싶은 인상 깊은 구절을 작성해 보세요'"
+                            
                             value={formData.quote}
                             onChange={(e) => handleInputChange('quote', e.target.value)}
                         />
