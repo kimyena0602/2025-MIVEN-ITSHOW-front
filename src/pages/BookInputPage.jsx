@@ -128,7 +128,6 @@ const BookInputPage = () => {
                                 />
                             </div>
                         </div>
-
                         {}
                         <div className={styles["section-title"]}>평점</div>
                         <div className={styles["rating-section"]}>
