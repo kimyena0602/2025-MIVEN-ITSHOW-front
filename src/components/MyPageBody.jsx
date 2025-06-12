@@ -13,7 +13,7 @@ export default function MyPageBody() {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5nbWkxQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY5MTIyNSwiZXhwIjoxNzQ5NzA5MjI1fQ.i4iT75y0ZzYmIqSlAVTjG0m5Y5aIZ-o5B2r6u-kcmDg",
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJheXVuQG5hdmVyLmNvbSIsImlhdCI6MTc0OTY5Mzk1NSwiZXhwIjoxNzQ5NzExOTU1fQ.wljBQQUv38gXm5tKqLBi4feqBdl3au2OTkKqvhYTGY8",
       },
     })
       .then((res) => res.json())
